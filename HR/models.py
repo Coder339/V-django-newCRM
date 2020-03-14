@@ -5,7 +5,6 @@ GENDER_CHOICES = (
         ('Not Known','NOT_KNOWN'),
         ('Male','MALE'),
         ('Female','FEMALE'),
-        ('Not Applicable','NOT_APPLICABLE')
     )
 
 
@@ -23,8 +22,7 @@ class StaffProfile(models.Model):     #employee record
                             default=NOT_KNOWN, blank=True)
     phone        = models.PhoneNumberField()
     address      = models.TextField(blank=True, default="")
-    birthday     = models.DateField(blank=True, default=None,
-                                null=True)
+    birthday     = models.DateField(blank=True, default=None,null=True)
     leave_days   = models.PositiveIntegerField()
     sick_days    = models.PositiveIntegerField()
 

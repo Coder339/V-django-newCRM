@@ -29,7 +29,7 @@ class UserEmployeeAccount(AbstractBaseUser):
     position        = models.CharField(max_length=150,blank=False,null=True)
     staff           = models.BooleanField(default=False) # staff user
     admin           = models.BooleanField(default=False) # super user
-    HR              = models.BooleanField(default=False)
+    hr              = models.BooleanField(default=False)
     manager         = models.BooleanField(default=False) 
     active          = models.BooleanField(default=False) 
 
