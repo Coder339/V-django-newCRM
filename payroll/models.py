@@ -1,21 +1,26 @@
 from django.db import models
 from accounts.models import UserEmployeeAccount
 
+class EmployeePackage(models.Model):
+    Id = models.CharField(max_length=50,primary_key=True)
+    UserId = models.ForeignKey(UserEmployeeAccount,on_delete='CASCADE')
+    package_amount   = models.IntegerField()
+    description      = models.TextField(max_length=250)
+    isActive         = models.BooleanField(default='true')
+
 
 class UserEmployeePaymentBill(models.Model):
-    userId           = models.ForeignKey(UserEmployeeAccount,on_delete='CASCADE')
-    packageId        = models.CharField(max_length=50)
-    paymentReceipt   = models.ForeignKey(userPaymentReceipt, on_delete='PROTECT')
+    userId           = models.models.CharField(max_length=20,primary_key=True)
+    packageId        = models.ForeignKey(EmployeePackage,on_delete='CASCADE')
     totalAttendance  = models.IntegerField()
     totalDays        = models.DateField()
-    package_amount   = models.IntegerField()
+    paymentReceipt   = models.ForeignKey(userPaymentReceipt, on_delete='PROTECT')
     paid_amount      = models.IntegerField()            # according to no. of days spent
-    isActive         = models.BooleanField(default='true')
-    description      = models.CharField(max_length=250)
+
 
 
 class UserPaymentReceipt(models.Model):                 #to be send
-    paymentId        = models.CharField(max_length=7, primary_key=True)  
+    paymentId        = models.CharField(max_length=20, primary_key=True)
     salary           = models.IntegerField()                 # paid_amount
     dateOfPayment    = models.DateField()
     modeOfPayment    = models.CharField(max_length=10)
@@ -23,5 +28,4 @@ class UserPaymentReceipt(models.Model):                 #to be send
 
 
 #   need some changes ^
-
 
