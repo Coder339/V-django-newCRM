@@ -1,101 +1,48 @@
 from django.db import models
-from django.contrib.auth.models import (
-    AbstractUser,
-
-)
-
-govId_choices = (
-    ('driving license', 'DRIVING LICENSE'),
-    ('passport', 'PASSPORT'),
-    ('other', 'OTHER')
-)
-
-position = (
-    ('SUPER USER', 'super user'),
-    ('MANAGER', 'manager'),
-    ('HR', 'hr'),
-    ('STAFF', 'staff')
-)
 
 
-# employeeaccount
+class Invoice(models.Model):  # for customers
+    from_client            = models.CharField(max_length=20, blank=False, null=True)
+    customer_name          = models.CharField(max_length=20, blank=False, null=True)
+    date_time              = models.DateTimeField(verbose_name = 'date and time of order',auto_now=False, 
+                                                  auto_now_add=True)
+        
+    Invoice_number         = models.TextField(max_length=30)  # keep in the format of fisrt customername then date then any serial_number
+                                                               # example ; "customername_date_serialnumber"
+                                                                # you can use first 2 or 3 letters of every word like
+                                                                 # customer: CU, january: JAN,
+                                                                  # serial number: numerals like 123,
 
-class User(AbstractUser):
-    role = models.CharField(verbose_name='user role', choices=position, max_length=20, default='admin')
-
-
-class EmployeeAccount(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    username = models.CharField(max_length=20, primary_key=True)
-    email_id = models.EmailField(max_length=150, blank=False, null=True)
-    password = models.CharField(max_length=100)
-    first_name = models.CharField(max_length=150, blank=False, null=True)
-    last_name = models.CharField(max_length=150, blank=False, null=True)
-    dob = models.DateField()
-    contact = models.IntegerField(blank=False, null=True)
-    address_1 = models.CharField(max_length=150, blank=False, null=True)
-    address_2 = models.CharField(max_length=150, blank=False, null=True)
-    city = models.CharField(max_length=150, blank=False, null=True)
-    state = models.CharField(max_length=150, blank=False, null=True)
-    country = models.CharField(max_length=150, blank=False, null=True)
-    zip_code = models.TextField(max_length=150, blank=False, null=True)
-    govt_id = models.CharField(max_length=150, blank=False, null=True, unique=True, choices=govId_choices)
-    employee_id = models.TextField(max_length=250, blank=False, null=True, unique=True)
-    position = models.CharField(max_length=150, blank=False, null=True)
-    staff = models.BooleanField(default=False)  # staff user
-    admin = models.BooleanField(default=False)  # super user
-    hr = models.BooleanField(default=False)
-    manager = models.BooleanField(default=False)
-    active = models.BooleanField(default=False)
-
-    USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = []
-
-    def __str__(self):
-        return self.username
-
-    @property
-    def is_superUser(self):
-        return self.admin
-
-    @property
-    def is_hr(self):
-        return self.hr
-
-    @property
-    def is_active(self):
-        return self.active
-
-    @property
-    def is_manager(self):
-        return self.manager
+    cust_sno               = models.TextField(verbose_name ='customer_serial_number',max_length=20, blank=False,
+                                              null=True)  # format :- first client_name then customer_name
+    Invoice_date           = models.DateField()
+    cost                   = models.IntegerField()
+    Tax                    = models.IntegerField()
+    TotalAmount            = models.IntegerField()
+    description            = models.TextField(max_length=20, blank=False, null=True)
+    payment_terms          = models.TextField(max_length=20, blank=False, null=True)
 
 
-# customeraccount
-class CustomerAccount(models.Model):
-    first_name = models.CharField(max_length=150, blank=False, null=True)
-    last_name = models.CharField(max_length=150, blank=False, null=True)
-    email_id = models.CharField(max_length=150, blank=False, null=True)
-    govt_id = models.CharField(max_length=150, blank=False, null=True, unique=True, choices=govId_choices)
-    contact = models.IntegerField(blank=False, null=True)
-    address_1 = models.CharField(max_length=150, blank=False, null=True)
-    address_2 = models.CharField(max_length=150, blank=False, null=True)
-    city = models.CharField(max_length=150, blank=False, null=True)
-    state = models.CharField(max_length=150, blank=False, null=True)
-    country = models.CharField(max_length=150, blank=False, null=True)
-    zip_code = models.TextField(max_length=150, blank=False, null=True)
-    # creationDate    = models.DateField(auto_now_add=True)
-    # updatedAt       = models.DateField(auto_now=True)
-    createdBy = models.ForeignKey(EmployeeAccount, on_delete=models.CASCADE, default='')
+class PurchaseOrder(models.Model):  # for vendors
+    from_client            = models.CharField(max_length=20, blank=False, null=True)
+    vendor_name            = models.CharField(max_length=20, blank=False, null=True)
+    date_time              = models.DateTimeField(verbose_name ='date and time of Purchasing Order',
+                                                  auto_now=False, auto_now_add=True)  
+    InvoiceNumber          = models.TextField(max_length=30)  # keep in the format of fisrt vendorname 
+                                                               # then date then any serial_number
+                                                                # example ; "customername_date_serialnumber"
+                                                                 # you can use first 2 or 3 letters of every word like
+                                                                  # customer: CU, january: JAN,
+                                                                   # serial number: numerals like 123,
 
-    def __str__(self):
-        return self.first_name
+    vendor_sn              = models.TextField(verbose_name = 'vendor_serial_number',max_length=20, blank=False,
+                                            null=True)  # format :- first client_name then vendor_name
+    InvoiceDate            = models.DateField()
+    rate_or_price          = models.IntegerField()
+    Tax                    = models.IntegerField()
+    TotalAmount            = models.IntegerField()
+    description            = models.TextField(max_length=20, blank=False, null=True)
+    payment_terms          = models.TextField(max_length=20, blank=False, null=True)
 
-
-
-
-
-
-
-
-
+# interdependancies are pending
+# need some changes
