@@ -1,7 +1,6 @@
 from django.db import models
-from phonenumber_field.modelfields import PhoneNumberField
-from accounts.models import UserEmployeeAccount
-from payroll import EmployeePackage
+from accounts.models import EmployeeAccount
+from payroll.models import EmployeePackage
 
 GENDER_CHOICES = (
     ('Not Known', 'NOT_KNOWN'),
@@ -10,21 +9,28 @@ GENDER_CHOICES = (
 )
 
 
+class Department(models.Model):
+    deptId = models.CharField(max_length=10)
+    dept_name = models.CharField(max_length=20)  # abc / xyz etc.
+    branch = models.CharField(max_length=20)  # location :- chandigarh/pune/banglore etc.
+
+    def __str__(self):
+        return self.dept_name
+
+
 class StaffProfile(models.Model):  # employee record stored as static
-    Id = models.ForeignKey(UserEmployeeAccount, on_delete=models.SET_NULL)
-    packageId = models.ForeignKey(EmployeePackage, on_delete=)
+    Id = models.ForeignKey(EmployeeAccount, on_delete=models.CASCADE)
+    packageId = models.ForeignKey(EmployeePackage, on_delete=models.CASCADE)
     father_name = models.CharField(max_length=20, blank=False)
     mother_name = models.CharField(max_length=20, blank=False)
     marital_status = models.CharField(max_length=20, blank=False)
-    gender = models.CharField(choices=GENDER_CHOICES, max_length=10,
-                              default=NOT_KNOWN, blank=True)
+    gender = models.CharField(choices=GENDER_CHOICES, max_length=10, blank=True)
 
 
-class StaffRole(models.Model):
-    staffId = models.ForeignKey(StaffProfile, on_delete=models.SET_NULL)
-    departmentId = models.CharField(max_length=10)
-    packageId = models.ForeignKey()
-    role = models.ForeignKey(StaffProfile, on_delete=models.SET_NULL)
+class StaffRole(models.Model):  # dynamic
+    Irole = models.ForeignKey(StaffProfile, on_delete=models.CASCADE)
+    departmentId = models.ForeignKey(Department, on_delete=models.CASCADE)
+    packageId = models.ForeignKey(EmployeePackage, models.CASCADE)
     description = models.TextField(blank=True, default='')
     leave_days = models.PositiveIntegerField()
     sick_days = models.PositiveIntegerField()
