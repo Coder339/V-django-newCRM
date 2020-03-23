@@ -28,7 +28,7 @@ class StaffProfile(models.Model):  # employee record stored as static
 
 
 class StaffRole(models.Model):  # dynamic
-    Irole                  = models.ForeignKey(StaffProfile, on_delete=models.CASCADE)
+    role                   = models.ForeignKey(StaffProfile, on_delete=models.CASCADE)
     departmentId           = models.ForeignKey(Department, on_delete=models.CASCADE)
     packageId              = models.ForeignKey(EmployeePackage, models.CASCADE)
     description            = models.TextField(blank=True, default='')

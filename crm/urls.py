@@ -1,4 +1,4 @@
-"""crm URL Configuration
+"""newcrm URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.0/topics/http/urls/
@@ -14,8 +14,16 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path,include
+from .views import home
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # path('accounts/',include('accounts.urls')),
+    path('finance/',include('finance.urls')),
+    # path('business/',include('business_development.urls')),
+    path('hr/',include('HR.urls')),
+    path('payroll/',include('payroll.urls')),
+    # path('sla/',include('SLA.urls')),
+    path('',home),
 ]
