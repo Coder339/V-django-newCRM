@@ -42,8 +42,7 @@ class StaffRole(models.Model):  # dynamic
     def __str__(self):
         return self.name
 
-# incomplete ^
-# phonenumberfield package need to be installed through cmd
+
 
 
 
