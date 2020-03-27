@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from .models import Department,StaffProfile,StaffRole
-from .serializer import DepartmentSerializer,StaffProfileSerializer,StaffRoleSerializer
+from .models import Department,StaffRole
+from .serializer import DepartmentSerializer,StaffRoleSerializer
 from rest_framework.generics import (
     ListAPIView,
     CreateAPIView,
@@ -24,24 +24,24 @@ class UpdateDepartmentView(UpdateAPIView):
 
                                          
                                          # StaffProfile view
-class CreateStaffProfileView(CreateAPIView):
-    queryset = StaffProfile.objects.all()
-    serializer_class = StaffProfileSerializer
-    permission_classes      =   []
-    authentication_classes  =   []
+# class CreateStaffProfileView(CreateAPIView):
+#     queryset = StaffProfile.objects.all()
+#     serializer_class = StaffProfileSerializer
+#     permission_classes      =   []
+#     authentication_classes  =   []
 
-class ListStaffProfileView(ListAPIView):
-    queryset = StaffProfile.objects.all()
-    serializer_class = StaffProfileSerializer
-    permission_classes      =   []
-    authentication_classes  =   []
+# class ListStaffProfileView(ListAPIView):
+#     queryset = StaffProfile.objects.all()
+#     serializer_class = StaffProfileSerializer
+#     permission_classes      =   []
+#     authentication_classes  =   []
 
-class UpdateStaffProfileView(UpdateAPIView):
-    queryset = StaffProfile.objects.all()
-    serializer_class = StaffProfileSerializer
-    permission_classes      =   []
-    authentication_classes  =   []
-    lookup_field = 'pk'
+# class UpdateStaffProfileView(UpdateAPIView):
+#     queryset = StaffProfile.objects.all()
+#     serializer_class = StaffProfileSerializer
+#     permission_classes      =   []
+#     authentication_classes  =   []
+#     lookup_field = 'pk'
     
 
 
