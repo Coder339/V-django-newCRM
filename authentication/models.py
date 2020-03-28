@@ -1,6 +1,7 @@
 from django.db import models
 # from model_utils import Choices
-from multiselectfield import MultiSelectField
+from services.models import Service
+# from multiselectfield import MultiSelectField
 from django.contrib.auth.models import (
     AbstractUser,
 
@@ -118,8 +119,8 @@ class CustomerAccount(models.Model):
     country           = models.CharField(max_length=150, blank=False, null=True)
     zip_code          = models.CharField(max_length=150, blank=False, null=True)
     createdBy         = models.ForeignKey(EmployeeAccount, on_delete=models.CASCADE, default='')
-    services          = MultiSelectField(choices=MY_CHOICES,null=True)
-    
+    # services          = MultiSelectField(choices=MY_CHOICES,null=True)
+    serviceTAG        = models.ManyToManyField(Service)
 
 
     # creationDate    = models.DateTimeField(auto_now_add=True)

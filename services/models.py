@@ -16,7 +16,7 @@ class Service(models.Model) :
     serviceId     = models.CharField(max_length=50,null=True,blank=False)
     name          = models.CharField(max_length=100,blank=False)
     name          = models.CharField(verbose_name='company',max_length=100,blank=False,null=True)
-    Type          = models.CharField(verbose_name='Type', choices=services, max_length=20, default='Unknown',null = True)
+    Type          = models.CharField(verbose_name='Type', choices=services, blank = False,max_length=20, default='Unknown',null = True)
     # code          = models.CharField(max_length=100)
     description   = models.CharField(max_length=100)
     cost          = models.IntegerField()

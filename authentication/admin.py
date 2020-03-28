@@ -21,10 +21,6 @@ admin.site.unregister(Group)
 admin.site.register(EmployeeAccount)
 admin.site.register(CustomerAccount)
 
-
-
-
-
 class CustomUserAdmin(UserAdmin):
     model = User
     add_form = CustomUserCreationForm
@@ -33,3 +29,10 @@ class CustomUserAdmin(UserAdmin):
 admin.site.register(User, CustomUserAdmin)
 
 
+from django.db import models
+from django.forms import CheckboxSelectMultiple
+
+class MyModelAdmin(admin.ModelAdmin):
+    formfield_overrides = {
+        models.ManyToManyField: {'widget': CheckboxSelectMultiple},
+    }

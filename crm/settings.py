@@ -40,12 +40,12 @@ INSTALLED_APPS = [
     'rest_framework',
     'authentication',
     'HR',
-    'business_development',
+    'ProjectManagement',
     'finance',
     'payroll',
     'SLA',
     'services',
-    'multiselectfield',
+    # 'multiselectfield',
 
 
 ]
