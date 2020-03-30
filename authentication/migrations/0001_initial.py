@@ -11,6 +11,7 @@ import django.utils.timezone
 class Migration(migrations.Migration):
 
     initial = True
+    atomic = False
 
     dependencies = [
         ('services', '0001_initial'),

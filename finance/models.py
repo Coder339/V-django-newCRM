@@ -1,5 +1,7 @@
 from django.db import models
-from django.db.models import F
+# from django.db.models import F
+from services.models import *
+
 
 class Invoice(models.Model):  # for customers
     from_client            = models.CharField(max_length=20, blank=False, null=True)
@@ -16,10 +18,11 @@ class Invoice(models.Model):  # for customers
     cust_sno               = models.CharField(verbose_name ='customerID',max_length=20, blank=False,
                                               null=True)  # format :- first client_name then customer_name
     Invoice_date           = models.DateField()
+    services               = models.ManyToManyField(Service)
+    description            = models.TextField(max_length=250, blank=False, null=True)    
     cost                   = models.IntegerField()
     Tax                    = models.IntegerField()
     TotalAmount            = models.IntegerField()
-    description            = models.TextField(max_length=250, blank=False, null=True)
     payment_terms          = models.TextField(max_length=250, blank=False, null=True)
     
     def __str__(self):
@@ -50,7 +53,8 @@ class PurchaseOrder(models.Model):  # for vendors
 
     vendor_sn              = models.CharField(verbose_name = 'vendorID',max_length=20, blank=False,
                                             null=True)  # format :- first client_name then vendor_name
-    PO_Date            = models.DateField()
+    PO_Date                = models.DateField()
+    Items                  = models.ManyToManyField(Item)
     rate_or_price          = models.IntegerField()
     Tax                    = models.IntegerField()
     TotalAmount            = models.IntegerField()

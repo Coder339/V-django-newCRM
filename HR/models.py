@@ -1,5 +1,5 @@
 from django.db import models
-from authentication.models import EmployeeAccount
+from authentication.models import EmployeeProfile
 from payroll.models import EmployeePackage
 
 GENDER_CHOICES = (
@@ -34,7 +34,7 @@ class Department(models.Model):
 
 
 class StaffRole(models.Model):  # dynamic
-    Id                     = models.ForeignKey(EmployeeAccount,on_delete=models.CASCADE,null=True)
+    Id                     = models.ForeignKey(EmployeeProfile,on_delete=models.CASCADE,null=True)
     departmentId           = models.ForeignKey(Department, on_delete=models.CASCADE,null=True)
     packageId              = models.ForeignKey(EmployeePackage, models.CASCADE,editable = False,null=True)
     description            = models.TextField(blank=True, default='')

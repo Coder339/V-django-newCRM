@@ -1,6 +1,6 @@
 from django.db import models
 # from model_utils import Choices
-from services.models import Service
+# from services.models import Service
 # from multiselectfield import MultiSelectField
 from django.contrib.auth.models import (
     AbstractUser,
@@ -29,14 +29,14 @@ class User(AbstractUser):
     role = models.CharField(verbose_name='user role', choices=position, max_length=20, default='unknown',null = True)
 
 
-class EmployeeAccount(models.Model):
-    personalId_choices = (
-    ('FACEBOOK', 'Facebook'),
-    ('TWITTER', 'Twitter'),
-    ('SKYPE', 'Skype'),
-    ('LINKEDin', 'Linkedin')
+class EmployeeProfile(models.Model):
+#     personalId_choices = (
+#     ('FACEBOOK', 'Facebook'),
+#     ('TWITTER', 'Twitter'),
+#     ('SKYPE', 'Skype'),
+#     ('LINKEDin', 'Linkedin')
 
-)
+# )
     user           = models.OneToOneField(User, on_delete=models.CASCADE)
     first_name     = models.CharField(max_length=150, blank=False, null=True)
     last_name      = models.CharField(max_length=150, blank=False, null=True)
@@ -52,9 +52,9 @@ class EmployeeAccount(models.Model):
     country        = models.CharField(max_length=150, blank=False, null=True)
     zip_code       = models.CharField(max_length=150, blank=False, null=True)
     govt_id        = models.CharField(max_length=150, blank=False, null=True,choices=govId_choices)
-    id_no             = models.CharField(verbose_name='',max_length=150, blank=False, null=True)
+    id_no          = models.CharField(verbose_name='',max_length=150, blank=False, null=True)
     employee_id    = models.CharField(max_length=50, blank=False, null=True, unique=True)
-    p_id1          = models.CharField(verbose_name='PersonalID',max_length=150, blank=False, null=True,choices=personalId_choices)  #type of pid
+    p_id1          = models.CharField(verbose_name='PersonalID',max_length=150, blank=False, null=True)  #type of pid
     p_id2          = models.CharField(verbose_name='',max_length=500, blank=False, null=True, unique=True)                      #link of pid
     position       = models.CharField(max_length=150, blank=False, null=True)
     staff          = models.BooleanField(default=False)  # staff user
@@ -87,29 +87,22 @@ class EmployeeAccount(models.Model):
 
 
 # customeraccount
-class CustomerAccount(models.Model):
-    personalId_choices = (
-    ('FACEBOOK', 'Facebook'),
-    ('TWITTER', 'Twitter'),
-    ('SKYPE', 'Skype'),
-    ('OTHER', 'Other'),
+class Customer(models.Model):
+#     personalId_choices = (
+#     ('FACEBOOK', 'Facebook'),
+#     ('TWITTER', 'Twitter'),
+#     ('SKYPE', 'Skype'),
+#     ('OTHER', 'Other'),
 
-)
-    MY_CHOICES = (
-    ('INTERNET','Netwrok Service'),
-    ('TV', 'Tv Premium'),
-    ('CALL', 'Call Service'),
-    ('MEDIA', 'Digital Media'),
-    ('CLOUD','Cloud Service'),
-    ('UNKNOWN','Unknown')
-)
+# )
+    
 
     first_name        = models.CharField(max_length=150, blank=False, null=True)
     last_name         = models.CharField(max_length=150, blank=False, null=True)
     email_id          = models.CharField(max_length=150, blank=False, null=True)
     govt_id           = models.CharField(max_length=150, blank=False, null=True, unique=True, choices=govId_choices)
     id_no             = models.CharField(verbose_name='',max_length=150, blank=False, null=True)
-    p_id1             = models.CharField(verbose_name='PersonalID',max_length=150, blank=False, null=True,choices=personalId_choices) # type of id
+    p_id1             = models.CharField(verbose_name='PersonalID',max_length=150, blank=False, null=True) # type of id
     p_id_link         = models.CharField(verbose_name='',max_length=500, blank=False, null=True, unique=True)                      #link of pid
     contact           = models.CharField(verbose_name='PhoneNo.',max_length=20,blank=False, null=True)
     address_1         = models.CharField(max_length=150, blank=False, null=True)
@@ -117,10 +110,10 @@ class CustomerAccount(models.Model):
     city              = models.CharField(max_length=150, blank=False, null=True)
     state             = models.CharField(max_length=150, blank=False, null=True)
     country           = models.CharField(max_length=150, blank=False, null=True)
-    zip_code          = models.CharField(max_length=150, blank=False, null=True)
-    createdBy         = models.ForeignKey(EmployeeAccount, on_delete=models.CASCADE, default='')
+    zip_code          = models.CharField(max_length=150, blank=False, null=True) 
+    createdBy         = models.ForeignKey(EmployeeProfile, on_delete=models.CASCADE, default='')
     # services          = MultiSelectField(choices=MY_CHOICES,null=True)
-    serviceTAG        = models.ManyToManyField(Service)
+    # serviceTAG        = models.ManyToManyField(Service)
 
 
     # creationDate    = models.DateTimeField(auto_now_add=True)
@@ -137,9 +130,51 @@ class CustomerAccount(models.Model):
         return self.first_name
 
 
+class Vendor(models.Model):
+#     personalId_choices = (
+#     ('FACEBOOK', 'Facebook'),
+#     ('TWITTER', 'Twitter'),
+#     ('SKYPE', 'Skype'),
+#     ('OTHER', 'Other'),
+
+# )
+    
+
+    first_name         = models.CharField(max_length=150, blank=False, null=True)
+    last_name          = models.CharField(max_length=150, blank=False, null=True)
+    email_id           = models.CharField(max_length=150, blank=False, null=True)
+    govt_id            = models.CharField(max_length=150, blank=False, null=True, unique=True, choices=govId_choices)
+    id_no              = models.CharField(verbose_name='',max_length=150, blank=False, null=True)
+    p_id1              = models.CharField(verbose_name='PersonalID',max_length=150, blank=False, null=True) # type of id
+    p_id_link          = models.CharField(verbose_name='',max_length=500, blank=False, null=True, unique=True)                      #link of pid
+    contact            = models.CharField(verbose_name='PhoneNo.',max_length=20,blank=False, null=True)
+    address_1          = models.CharField(max_length=150, blank=False, null=True)
+    address_2          = models.CharField(max_length=150, blank=False, null=True)
+    city               = models.CharField(max_length=150, blank=False, null=True)
+    state              = models.CharField(max_length=150, blank=False, null=True)
+    country            = models.CharField(max_length=150, blank=False, null=True)
+    zip_code           = models.CharField(max_length=150, blank=False, null=True) 
+    company_Name       = models.CharField(max_length=150, blank=False, null=True) 
+    company_Address1   = models.CharField(max_length=150, blank=False, null=True) 
+    company_Address2   = models.CharField(max_length=150, blank=False, null=True) 
+    company_Phone      = models.CharField(max_length=150, blank=False, null=True) 
+    company_EmailId    = models.CharField(max_length=150, blank=False, null=True) 
+
+    def __str__(self):
+        return self.fisrt_name
 
 
+class Company(models.Model):
 
+    company_Name       = models.CharField(max_length=150, blank=False, null=True) 
+    company_Address1   = models.CharField(max_length=150, blank=False, null=True) 
+    company_Address2   = models.CharField(max_length=150, blank=False, null=True) 
+    company_Phone      = models.CharField(max_length=150, blank=False, null=True) 
+    company_EmailId    = models.CharField(max_length=150, blank=False, null=True) 
+
+    def __str__(self):
+        return self.company_Name
+    
 
 
 

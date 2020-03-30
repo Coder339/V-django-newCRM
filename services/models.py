@@ -2,31 +2,31 @@ from django.db import models
 
 class Service(models.Model) :
     
-    services = (
-    ('INTERNET','Netwrok Service'),
-    ('TV', 'Tv Premium'),
-    ('CALL', 'Call Service'),
-    ('MEDIA', 'Digital Media'),
-    ('CLOUD','Cloud Service')
-    # ('UNKNOWN','Unknown')
-)   
+#     services = (
+#     ('INTERNET','Netwrok Service'),
+#     ('TV', 'Tv Premium'),
+#     ('CALL', 'Call Service'),
+#     ('MEDIA', 'Digital Media'),
+#     ('CLOUD','Cloud Service')
+#     # ('UNKNOWN','Unknown')
+# )   
     
     
 
     serviceId     = models.CharField(max_length=50,null=True,blank=False)
-    name          = models.CharField(max_length=100,blank=False)
-    name          = models.CharField(verbose_name='company',max_length=100,blank=False,null=True)
-    Type          = models.CharField(verbose_name='Type', choices=services, blank = False,max_length=20, default='Unknown',null = True)
+    # name          = models.CharField(max_length=100,blank=False)
+    name_c        = models.CharField(verbose_name='company',max_length=100,blank=False,null=True)
+    Type          = models.CharField(verbose_name='Type',max_length=20, blank = False,default='Unknown',null = True)
     # code          = models.CharField(max_length=100)
     description   = models.CharField(max_length=100)
     cost          = models.IntegerField()
     isActive      = models.BooleanField(default='true')
 
     def __str__(self):
-        return self.name
+        return self.serviceId 
     
 
-class Plans(models.Model):
+class Plan(models.Model):
     plans = (
     ('MONTHLY','Monthly'),
     ('YEARLY', 'Yearly'),
@@ -38,8 +38,8 @@ class Plans(models.Model):
     # ('UNKNOWN','Unknown')
 )
     
-    planId        = models.CharField(max_length=10, primary_key=True,blank=False)   
-    Type          = models.CharField(max_length=10,choices=types,null=True)
+    planId        = models.CharField(max_length=30, primary_key=True,blank=False)   
+    Type          = models.CharField(max_length=20,choices=types,null=True)
     plan          = models.CharField(verbose_name='plan', choices=plans, max_length=20, default='Unknown',null = True)
     validity      = models.DateField(null=True)
     dateOfBooking = models.DateField(null=True)
@@ -51,4 +51,14 @@ class Plans(models.Model):
         return self.planId
     
 
-#
+
+class Item(models.Model):
+    item_no      = models.CharField(max_length=30, primary_key=True,blank=False)   
+    item_name    = models.CharField(max_length=10,blank=False)   
+    company_name = models.CharField(max_length=10,blank=False)
+
+    def __str__(self):
+        return self.item_no
+    
+
+

@@ -15,17 +15,19 @@ class Business_opportunityCreateAPIView(generics.CreateAPIView):
     serializers_class      =         Business_opportunitySerializer
     permission_classes     =         []
     authentication_class   =         []
+
 class Business_opportunityListAPIView(generics.ListAPIView):
     queryset               =         Business_opportunity.objects.all()
     serializers_class      =         Business_opportunitySerializer
     permission_classes     =         []
     authentication_class   =         []
+    
 class Business_opportunityUpdateAPIView(generics.UpdateAPIView):
     queryset               =         Business_opportunity.objects.all()
     serializers_class      =         Business_opportunitySerializer
     permission_classes     =         []
     authentication_class   =         []
-    lookup_field           =         ''
+    lookup_field           =         'project_name'
 
 #Project
 class ProjectCreateAPIView(generics.CreateAPIView):
@@ -45,24 +47,24 @@ class ProjectUpdateAPIView(generics.UpdateAPIView):
     authentication_class   =         []
     lookup_field           =         ''
 
-#Task
-class TaskCreateAPIView(generics.CreateAPIView):
-    queryset               =         Task.objects.all()
-    serializers_class      =         TaskSerializer
-    permission_classes     =         []
-    authentication_class   =         []
-class TaskListAPIView(generics.ListAPIView):
-    queryset               =         Task.objects.all()
-    serializers_class      =         TaskSerializer
-    permission_classes     =         []
-    authentication_class   =         []
-class TaskUpdateAPIView(generics.UpdateAPIView):
-    queryset               =         Task.objects.all()
-    serializers_class      =         TaskSerializer
-    permission_classes     =         []
-    authentication_class   =         []
-    lookup_field           =         ''
-    
+# #Task
+# class TaskCreateAPIView(generics.CreateAPIView):
+#     queryset               =         Task.objects.all()
+#     serializers_class      =         TaskSerializer
+#     permission_classes     =         []
+#     authentication_class   =         []
+# class TaskListAPIView(generics.ListAPIView):
+#     queryset               =         Task.objects.all()
+#     serializers_class      =         TaskSerializer
+#     permission_classes     =         []
+#     authentication_class   =         []
+# class TaskUpdateAPIView(generics.UpdateAPIView):
+#     queryset               =         Task.objects.all()
+#     serializers_class      =         TaskSerializer
+#     permission_classes     =         []
+#     authentication_class   =         []
+#     lookup_field           =         ''
+
 #TodoList
 class TodoListCreateAPIView(generics.CreateAPIView):
     queryset               =         TodoList.objects.all()

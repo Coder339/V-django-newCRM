@@ -1,5 +1,5 @@
 from django.db import models
-from authentication.models import EmployeeAccount
+from authentication.models import EmployeeProfile
 
 
 
@@ -7,7 +7,7 @@ from authentication.models import EmployeeAccount
 
 class EmployeePackage(models.Model):
     Id              = models.CharField(max_length=50, primary_key=True)
-    UserId          = models.ForeignKey(EmployeeAccount, on_delete=models.CASCADE)
+    UserId          = models.ForeignKey(EmployeeProfile, on_delete=models.CASCADE)
     package_amount  = models.IntegerField()
     description     = models.TextField(max_length=250)
     isActive        = models.BooleanField(default='true')

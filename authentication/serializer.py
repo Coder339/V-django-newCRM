@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User,EmployeeAccount
+from .models import User,EmployeeProfile
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -7,8 +7,8 @@ class UserSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class EmployeeAccountSerializer(serializers.ModelSerializer):
+class EmployeeProfileSerializer(serializers.ModelSerializer):
     class Meta:
-        model  = EmployeeAccount
+        model  = EmployeeProfile
         fields = '__all__'
 

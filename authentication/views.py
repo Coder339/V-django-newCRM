@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from .models import User,EmployeeAccount
-from .serializer import UserSerializer,EmployeeAccountSerializer
+from .models import User,EmployeeProfile
+from .serializer import UserSerializer,EmployeeProfileSerializer
 from rest_framework.generics import (
     ListAPIView,
     CreateAPIView,
@@ -31,20 +31,20 @@ class UpdateUserView(UpdateAPIView):
 
                                     # user's profile
 class CreateProfileView(CreateAPIView):
-    queryset = EmployeeAccount.objects.all()
-    serializer_class = EmployeeAccountSerializer
+    queryset = EmployeeProfile.objects.all()
+    serializer_class = EmployeeProfileSerializer
     permission_classes      =   []
     authentication_classes  =   []
 
 class ListProfileView(ListAPIView):
-    queryset = EmployeeAccount.objects.all()
-    serializer_class = EmployeeAccountSerializer
+    queryset = EmployeeProfile.objects.all()
+    serializer_class = EmployeeProfileSerializer
     permission_classes      =   []
     authentication_classes  =   []
 
 class UpdateProfileView(UpdateAPIView):
-    queryset = EmployeeAccount.objects.all()
-    serializer_class = EmployeeAccountSerializer
+    queryset = EmployeeProfile.objects.all()
+    serializer_class = EmployeeProfileSerializer
     permission_classes      =   []
     authentication_classes  =   []
     lookup_field = 'pk'
