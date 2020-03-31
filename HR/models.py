@@ -21,7 +21,7 @@ class Department(models.Model):
 
 class StaffProfile(models.Model):  # dynamic
     EmpId                     = models.ForeignKey(EmployeeProfile,on_delete=models.CASCADE,null=True)
-    departmentId              = models.ForeignKey(Department, on_delete=models.CASCADE,null=True)
+    department                = models.ForeignKey(Department, on_delete=models.CASCADE,null=True)
     packageId                 = models.ForeignKey(EmployeePackage, models.CASCADE,editable = False,null=True)
     
     # leave_days             = models.PositiveIntegerField()
@@ -34,7 +34,7 @@ class StaffProfile(models.Model):  # dynamic
     isactive                 = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.Id.first_name
+        return self.EmpId.first_name
 
 
 

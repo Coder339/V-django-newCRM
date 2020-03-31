@@ -19,3 +19,8 @@ class SLA(models.Model):
    
     class Meta():
         verbose_name_plural = 'SLA'
+
+    def __str__(self,*agrs,**kwargs):
+        return self.customer_details.first_name
+    
+    

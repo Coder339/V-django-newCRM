@@ -68,7 +68,7 @@ class Product(models.Model):
                                                             #--------------------FOR SERVICE INLINE
 class ServiceEntry(models.Model):
     invoice                = models.ForeignKey(Invoice,on_delete=models.CASCADE,null=True)
-    service                = models.OneToOneField(Service,on_delete=models.CASCADE,null=True)
+    service                = models.ForeignKey(Service,on_delete=models.CASCADE,null=True)
     description            = models.CharField(max_length=250, blank=False, null=True)    
     price                  = models.DecimalField(max_digits=20, decimal_places=2, blank=True, null=True)
     Qty                    = models.IntegerField()
@@ -79,7 +79,7 @@ class ServiceEntry(models.Model):
                                                             #--------------------FOR PRODUCT INLINE
 class ProductEntry(models.Model):
     PO                     = models.ForeignKey(PurchaseOrder,on_delete=models.CASCADE,null=True)
-    Product                = models.OneToOneField(Product,on_delete=models.CASCADE,null=True)
+    Product                = models.ForeignKey(Product,on_delete=models.CASCADE,null=True)
     description            = models.CharField(max_length=250, blank=False, null=True)
     price                  = models.DecimalField(max_digits=20,decimal_places=2, blank=True, null=True)
     Qty                    = models.IntegerField()

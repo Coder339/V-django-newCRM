@@ -41,7 +41,7 @@ class ProductEntryInline(admin.TabularInline):
     #     return "$" + str(obj.quantity * obj.inventory.price)
 
 
-
+                                                    
 class POAdmin(admin.ModelAdmin):
     inlines = [ProductEntryInline]
     class Meta:
@@ -56,6 +56,7 @@ class POAdmin(admin.ModelAdmin):
                      )
             }),
     )
+
 
 
 admin.site.register(Invoice,InvoiceAdmin)
