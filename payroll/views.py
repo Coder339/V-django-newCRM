@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from .models import UserPaymentReceipt,EmployeePackage,UserEmployeePaymentBill
-from .serializer import UserPaymentReceiptSerializer,EmployeePackageSerializer,UserEmployeePaymentBillSerializer
+from .models import *
+from .serializer import *
 from rest_framework.generics import (
     ListAPIView,
     CreateAPIView,
@@ -9,62 +9,62 @@ from rest_framework.generics import (
     DestroyAPIView,
 )
 
-                                                     # UserPaymentReceipt View
-class CreateUserPaymentReceiptView(CreateAPIView): 
-    queryset = UserPaymentReceipt.objects.all()
-    serializer_class = UserPaymentReceiptSerializer
+                                                  # UserPaymentReceipt View
+class CreateUserSalaryPackageView(CreateAPIView): 
+    queryset                = SalaryPackage.objects.all()
+    serializer_class        = SalaryPackageSerializer
     permission_classes      =   []
     authentication_classes  =   []
 
-class ListUserPaymentReceiptView(ListAPIView):
-    queryset = UserPaymentReceipt.objects.all()
-    serializer_class = UserPaymentReceiptSerializer
+class ListUserSalaryPackageView(ListAPIView):
+    queryset                = SalaryPackage.objects.all()
+    serializer_class        = SalaryPackageSerializer
     permission_classes      =   []
     authentication_classes  =   []
 
 class UpdateUserPaymentReceiptView(UpdateAPIView):
-    queryset = UserPaymentReceipt.objects.all()
-    serializer_class = UserPaymentReceiptSerializer
+    queryset                = MonthlySalary.objects.all()
+    serializer_class        = SalaryPackageSerializer
     permission_classes      =   []
     authentication_classes  =   []
-    lookup_field = 'paymentId'
+    lookup_field            = 'paymentId'
 
                                                       # EmployeePackage view
 class CreateEmployeePackageView(CreateAPIView): 
-    queryset = EmployeePackage.objects.all()
-    serializer_class = EmployeePackageSerializer
+    queryset                = EmployeePackage.objects.all()
+    serializer_class        = EmployeePackageSerializer
     permission_classes      =   []
     authentication_classes  =   []
 
 class ListEmployeePackageView(ListAPIView):
-    queryset = EmployeePackage.objects.all()
-    serializer_class = EmployeePackageSerializer
+    queryset                = EmployeePackage.objects.all()
+    serializer_class        = EmployeePackageSerializer
     permission_classes      =   []
     authentication_classes  =   []
 
 class UpdateEmployeePackageView(UpdateAPIView):
-    queryset = EmployeePackage.objects.all()
-    serializer_class = EmployeePackageSerializer
+    queryset                = EmployeePackage.objects.all()
+    serializer_class        = EmployeePackageSerializer
     lookup_field = 'pk'
     permission_classes      =   []
     authentication_classes  =   []
 
                                                        # UserEmployeePaymentBill
-class CreateUserEmployeePaymentBillView(CreateAPIView): 
-    queryset = UserEmployeePaymentBill.objects.all()
-    serializer_class = UserEmployeePaymentBillSerializer
+class CreateUserMonthlySalaryView(CreateAPIView): 
+    queryset                = MonthlySalary.objects.all()
+    serializer_class        = MonthlySalarySerializer
     permission_classes      =   []
     authentication_classes  =   []
 
-class ListUserEmployeePaymentBillView(ListAPIView):
-    queryset = UserEmployeePaymentBill.objects.all()
-    serializer_class = UserEmployeePaymentBillSerializer
+class ListUserMonthlySalaryView(ListAPIView):
+    queryset                = MonthlySalary.objects.all()
+    serializer_class        = MonthlySalarySerializer
     permission_classes      =   []
     authentication_classes  =   []
 
-class UpdateUserEmployeePaymentBillView(UpdateAPIView):
-    queryset = UserEmployeePaymentBill.objects.all()
-    serializer_class = UserEmployeePaymentBillSerializer
+class UpdateUserMonthlySalaryBillView(UpdateAPIView):
+    queryset                = MonthlySalary.objects.all()
+    serializer_class        = MonthlySalarySerializer
     permission_classes      =   []
     authentication_classes  =   []
     lookup_field = 'pk'

@@ -1,9 +1,9 @@
 from rest_framework import serializers
-from .models import UserPaymentReceipt,EmployeePackage,UserEmployeePaymentBill
+from .models import *
 
-class UserPaymentReceiptSerializer(serializers.ModelSerializer):
+class SalaryPackageSerializer(serializers.ModelSerializer):
     class Meta:
-        model  = UserPaymentReceipt
+        model  = SalaryPackage
         fields = '__all__'
 
 
@@ -13,7 +13,7 @@ class EmployeePackageSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class UserEmployeePaymentBillSerializer(serializers.ModelSerializer):
+class MonthlySalarySerializer(serializers.ModelSerializer):
     class Meta:
-        model  = UserEmployeePaymentBill
+        model  = MonthlySalary
         fields = '__all__'

@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import UserEmployeePaymentBill,UserPaymentReceipt,EmployeePackage
+from .models import *
 
-admin.site.register(UserEmployeePaymentBill)
-admin.site.register(UserPaymentReceipt)
+admin.site.register(SalaryPackage)
 admin.site.register(EmployeePackage)
+admin.site.register(MonthlySalary)
