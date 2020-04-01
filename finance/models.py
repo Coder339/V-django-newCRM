@@ -1,9 +1,11 @@
 from django.db import models
+from authentication.models import *
 # from django.db.models import F
 # from services.models import *
 
 
 class Invoice(models.Model):  # for customers
+    customer               = models.ForeignKey(Customer, on_delete=models.CASCADE,editable=False,null=True)
     from_company           = models.CharField(max_length=20, blank=False, null=True)
     customer_name          = models.CharField(max_length=20, blank=False, null=True)
     # date_time              = models.DateTimeField(verbose_name = 'date and time of order',auto_now=False, 
@@ -24,9 +26,9 @@ class Invoice(models.Model):  # for customers
     def __str__(self):
         return self.customer_name
     
-    @property
-    def total(self,*args,**kwargs):
-        return self.cost + self.Tax
+    # @property
+    # def total(self,*args,**kwargs):
+    #     return self.cost + self.Tax
 
     # t = models.CharField(total(),max_length=50)
     
@@ -36,6 +38,7 @@ class Invoice(models.Model):  # for customers
 
     
 class PurchaseOrder(models.Model):  # for vendors
+    Vendor                 = models.ForeignKey(Vendor, on_delete=models.CASCADE,editable=False,null=True)
     from_company           = models.CharField(max_length=50, blank=False, null=True)
     vendor_name            = models.CharField(max_length=50, blank=False, null=True)
     # date_time              = models.DateTimeField(verbose_name ='date and time of Purchasing Order',

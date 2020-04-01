@@ -37,10 +37,11 @@ class EmployeeProfile(models.Model):
 #     ('LINKEDin', 'Linkedin')
 
 # )
-    user           = models.OneToOneField(User, on_delete=models.CASCADE)
+    
     first_name     = models.CharField(max_length=150, blank=False, null=True)
     last_name      = models.CharField(max_length=150, blank=False, null=True)
-    username       = models.CharField(max_length=20, primary_key=True)
+    username       = models.OneToOneField(User, on_delete=models.CASCADE,default='')
+    # username       = models.CharField(max_length=20, primary_key=True)
     email_id       = models.EmailField(max_length=150, blank=False, null=True)
     # password     = models.CharField(max_length=100)
     dob            = models.DateField()
@@ -52,7 +53,7 @@ class EmployeeProfile(models.Model):
     country        = models.CharField(max_length=150, blank=False, null=True)
     zip_code       = models.CharField(max_length=150, blank=False, null=True)
     govt_id        = models.CharField(max_length=150, blank=False, null=True,choices=govId_choices)
-    id_no          = models.CharField(verbose_name='',max_length=150, blank=False, null=True)
+    id_no          = models.CharField(verbose_name='',max_length=150, unique=True,blank=False, null=True)
     employee_id    = models.CharField(max_length=50, blank=False, null=True, unique=True)
     p_id1          = models.CharField(verbose_name='PersonalID',max_length=150, blank=False, null=True)  #type of pid
     p_id2          = models.CharField(verbose_name='',max_length=500, blank=False, null=True, unique=True)                      #link of pid
@@ -67,7 +68,7 @@ class EmployeeProfile(models.Model):
     # REQUIRED_FIELDS = []
 
     def __str__(self):
-        return self.first_name
+        return self.employee_id
 
     @property
     def is_superUser(self):
@@ -100,8 +101,8 @@ class Customer(models.Model):
     first_name        = models.CharField(max_length=150, blank=False, null=True)
     last_name         = models.CharField(max_length=150, blank=False, null=True)
     email_id          = models.CharField(max_length=150, blank=False, null=True)
-    govt_id           = models.CharField(max_length=150, blank=False, null=True, unique=True, choices=govId_choices)
-    id_no             = models.CharField(verbose_name='',max_length=150, blank=False, null=True)
+    govt_id           = models.CharField(max_length=150, blank=False, null=True, choices=govId_choices)
+    id_no             = models.CharField(verbose_name='',max_length=150, unique = True,blank=False, null=True)
     p_id1             = models.CharField(verbose_name='PersonalID',max_length=150, blank=False, null=True) # type of id
     p_id_link         = models.CharField(verbose_name='',max_length=500, blank=False, null=True, unique=True)                      #link of pid
     contact           = models.CharField(verbose_name='PhoneNo.',max_length=20,blank=False, null=True)
@@ -143,8 +144,8 @@ class Vendor(models.Model):
     first_name         = models.CharField(max_length=150, blank=False, null=True)
     last_name          = models.CharField(max_length=150, blank=False, null=True)
     email_id           = models.CharField(max_length=150, blank=False, null=True)
-    govt_id            = models.CharField(max_length=150, blank=False, null=True, unique=True, choices=govId_choices)
-    id_no              = models.CharField(verbose_name='',max_length=150, blank=False, null=True)
+    govt_id            = models.CharField(max_length=150, blank=False, choices=govId_choices,null=True)
+    id_no              = models.CharField(verbose_name='',max_length=150, blank=False, unique = True, null=True)
     p_id1              = models.CharField(verbose_name='PersonalID',max_length=150, blank=False, null=True) # type of id
     p_id_link          = models.CharField(verbose_name='',max_length=500, blank=False, null=True, unique=True)                      #link of pid
     contact            = models.CharField(verbose_name='PhoneNo.',max_length=20,blank=False, null=True)
@@ -161,7 +162,7 @@ class Vendor(models.Model):
     company_EmailId    = models.CharField(max_length=150, blank=False, null=True) 
 
     def __str__(self):
-        return self.fisrt_name
+        return self.first_name
 
 
 class Company(models.Model):

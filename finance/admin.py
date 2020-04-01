@@ -9,10 +9,16 @@ from services.models import *
 
 class ServiceEntryInline(admin.TabularInline):
     model = ServiceEntry
-    # extra = 0
+    extra = 0
+    readonly_fields = ['unit_price','amount']
+    
+    def unit_price(self, obj):
+        return "$" + str(float(obj.service.cost))
 
-    # def subtotal(self, obj):
-    #     return "$" + str(obj.quantity * obj.inventory.price)
+    def amount(self, obj):
+        value = (obj.service.cost * obj.Qty) - (((obj.Discount)/100) * (obj.Qty * obj.service.cost))
+        return "$" + str(float(value + obj.Tax))
+    
 
 
 
@@ -34,11 +40,15 @@ class InvoiceAdmin(admin.ModelAdmin):
                                                     #----------------------------------FOR ADDING PRODUCTS
 class ProductEntryInline(admin.TabularInline):
     model = ProductEntry
-    # extra = 0
+    extra = 0
+    readonly_fields = ['unit_price','amount']
+    
+    def unit_price(self, obj):
+        return "$" + str(float(obj.Product.cost))
 
-
-    # def subtotal(self, obj):
-    #     return "$" + str(obj.quantity * obj.inventory.price)
+    def amount(self, obj):
+        value = (obj.Product.cost * obj.Qty) - (((obj.Discount)/100) * (obj.Qty * obj.Product.cost))
+        return "$" + str(float(value + obj.Tax))
 
 
                                                     

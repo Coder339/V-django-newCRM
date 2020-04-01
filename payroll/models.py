@@ -47,7 +47,7 @@ class MonthlySalary(models.Model):  #dynamic
     total_Salary_Amount        = models.PositiveIntegerField()  # according to no. of days spent
 
     def __str__(self):
-        return self.EmpId.first_name
+        return self.EmpId.employee_id
     
     
 

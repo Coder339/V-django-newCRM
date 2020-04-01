@@ -54,9 +54,11 @@ class Plan(models.Model):
 
 
 class Product(models.Model):
-    Product_no         = models.CharField(max_length=30, primary_key=True,blank=False)   
-    Product_name       = models.CharField(max_length=20,blank=False)   
-    Company_name       = models.CharField(max_length=20,blank=False)
+    Product_no          = models.CharField(max_length=30, primary_key=True,blank=False)   
+    Product_name        = models.CharField(max_length=20,blank=False)   
+    cost                = models.FloatField()
+    # cost                = models.DecimalField(max_digits=20, decimal_places=2, blank=True)
+    Company_name        = models.CharField(max_length=20,blank=False)
     Product_Description = models.TextField(max_length=250,null=True)
 
     def __str__(self):
@@ -70,22 +72,22 @@ class ServiceEntry(models.Model):
     invoice                = models.ForeignKey(Invoice,on_delete=models.CASCADE,null=True)
     service                = models.ForeignKey(Service,on_delete=models.CASCADE,null=True)
     description            = models.CharField(max_length=250, blank=False, null=True)    
-    price                  = models.DecimalField(max_digits=20, decimal_places=2, blank=True, null=True)
+    # price                  = models.DecimalField(max_digits=20, decimal_places=2, blank=True, null=True)
     Qty                    = models.IntegerField()
     Discount               = models.IntegerField()
     Tax                    = models.IntegerField()
-    SubTotal               = models.IntegerField()
+    # SubTotal               = models.IntegerField()
 
                                                             #--------------------FOR PRODUCT INLINE
 class ProductEntry(models.Model):
     PO                     = models.ForeignKey(PurchaseOrder,on_delete=models.CASCADE,null=True)
     Product                = models.ForeignKey(Product,on_delete=models.CASCADE,null=True)
     description            = models.CharField(max_length=250, blank=False, null=True)
-    price                  = models.DecimalField(max_digits=20,decimal_places=2, blank=True, null=True)
+    # price                  = models.DecimalField(max_digits=20,decimal_places=2, blank=True, null=True)
     Qty                    = models.IntegerField()
     Discount               = models.IntegerField()
     Tax                    = models.IntegerField()
-    SubTotal               = models.IntegerField()
+    # SubTotal               = models.IntegerField()
     # payment_terms          = models.TextField(max_length=250, blank=False, null=True)
 
     
