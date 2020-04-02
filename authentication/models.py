@@ -97,7 +97,6 @@ class Customer(models.Model):
 
 # )
     
-
     first_name        = models.CharField(max_length=150, blank=False, null=True)
     last_name         = models.CharField(max_length=150, blank=False, null=True)
     email_id          = models.CharField(max_length=150, blank=False, null=True)

@@ -20,7 +20,7 @@ class Service(models.Model) :
     Type          = models.CharField(verbose_name='Type',max_length=20, blank = False,default='Unknown',null = True)
     # code          = models.CharField(max_length=100)
     description   = models.CharField(max_length=100)
-    cost          = models.IntegerField()
+    cost          = models.FloatField()
     isActive      = models.BooleanField(default='true')
 
     def __str__(self):
@@ -73,9 +73,10 @@ class ServiceEntry(models.Model):
     service                = models.ForeignKey(Service,on_delete=models.CASCADE,null=True)
     description            = models.CharField(max_length=250, blank=False, null=True)    
     # price                  = models.DecimalField(max_digits=20, decimal_places=2, blank=True, null=True)
-    Qty                    = models.IntegerField()
-    Discount               = models.IntegerField()
-    Tax                    = models.IntegerField()
+    rate                   = models.FloatField()
+    Qty                    = models.FloatField()
+    Discount               = models.FloatField()
+    Tax                    = models.FloatField()
     # SubTotal               = models.IntegerField()
 
                                                             #--------------------FOR PRODUCT INLINE
@@ -84,10 +85,11 @@ class ProductEntry(models.Model):
     Product                = models.ForeignKey(Product,on_delete=models.CASCADE,null=True)
     description            = models.CharField(max_length=250, blank=False, null=True)
     # price                  = models.DecimalField(max_digits=20,decimal_places=2, blank=True, null=True)
-    Qty                    = models.IntegerField()
-    Discount               = models.IntegerField()
-    Tax                    = models.IntegerField()
-    # SubTotal               = models.IntegerField()
+    rate                   = models.FloatField()    
+    Qty                    = models.FloatField()
+    Discount               = models.FloatField()
+    Tax                    = models.FloatField()
+    # SubTotal               = models.IntFloatFieldegerField()
     # payment_terms          = models.TextField(max_length=250, blank=False, null=True)
 
     
