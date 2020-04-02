@@ -14,7 +14,7 @@ class SLA(models.Model):
     ticket_no               =               models.IntegerField()
     problem_details         =               models.TextField(blank='False', null='False')
     priority                =               models.CharField(choices=priority,max_length=200)
-    date                    =               models.DateField(default='')
+    date                    =               models.DateField()
     responsible_person      =               models.ForeignKey(EmployeeProfile,on_delete=models.CASCADE,default='')
     status                  =               models.CharField(choices=stage,max_length=200,null=True)
    
