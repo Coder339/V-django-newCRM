@@ -27,7 +27,9 @@ position = (
 
 class User(AbstractUser):
     role = models.CharField(verbose_name='user role', choices=position, max_length=20, default='unknown',null = True)
-
+    
+    class Meta:
+        verbose_name_plural = 'user'
 
 class EmployeeProfile(models.Model):
 #     personalId_choices = (
@@ -85,6 +87,10 @@ class EmployeeProfile(models.Model):
     @property
     def is_manager(self):
         return self.manager
+    
+    class Meta:
+        verbose_name_plural = 'employee'
+    
 
 
 # customeraccount
@@ -97,7 +103,6 @@ class Customer(models.Model):
 
 # )
     
-
     first_name        = models.CharField(max_length=150, blank=False, null=True)
     last_name         = models.CharField(max_length=150, blank=False, null=True)
     email_id          = models.CharField(max_length=150, blank=False, null=True)
@@ -129,6 +134,9 @@ class Customer(models.Model):
     
     def __str__(self):
         return self.first_name
+
+    class Meta:
+        verbose_name_plural = 'Customer'
 
 
 class Vendor(models.Model):
@@ -164,17 +172,26 @@ class Vendor(models.Model):
     def __str__(self):
         return self.first_name
 
+    class Meta:
+        verbose_name_plural = 'vendor'
+
 
 class Company(models.Model):
 
     company_Name       = models.CharField(max_length=150, blank=False, null=True) 
     company_Address1   = models.CharField(max_length=150, blank=False, null=True) 
     company_Address2   = models.CharField(max_length=150, blank=False, null=True) 
+    city               = models.CharField(max_length=150, blank=False, null=True) 
+    zip_code           = models.CharField(max_length=150, blank=False, null=True) 
+    country            = models.CharField(max_length=150, blank=False, null=True) 
     company_Phone      = models.CharField(max_length=150, blank=False, null=True) 
     company_EmailId    = models.CharField(max_length=150, blank=False, null=True) 
 
     def __str__(self):
         return self.company_Name
+
+    class Meta:
+        verbose_name_plural = 'company'
     
 
 

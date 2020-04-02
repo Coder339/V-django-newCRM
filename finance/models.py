@@ -1,5 +1,7 @@
 from django.db import models
 from authentication.models import *
+from .utils import unique_cust_sno_generator
+from django.db.models.signals import pre_save
 # from django.db.models import F
 # from services.models import *
 
@@ -16,15 +18,29 @@ class Invoice(models.Model):  # for customers
                                                                 # you can use first 2 or 3 letters of every word like
                                                                  # customer: CU, january: JAN,
                                                                   # serial number: numerals like 123,
-    # unique_id              = models.AutoField(primary_key=True,null=False)
-    cust_sno               = models.CharField(verbose_name ='customerID',max_length=20, blank=False,
-                                              null=True)  # format :- first client_name then customer_name
+
+    # cust_sno               = models.CharField(verbose_name ='customerID',max_length=20, blank=True,
+                                            #   null=True)  # format :- first client_name then customer_name
     Invoice_date           = models.DateField()
     
     payment_terms          = models.TextField(max_length=250, blank=False, null=True)
     
     def __str__(self):
         return self.customer_name
+
+    class Meta:
+        verbose_name_plural = 'invoice'
+
+    # def __str__(self):
+    #     return self.cust_sno
+
+
+    # def pre_save_create_cust_sno(sender, instance, *args, **kwargs):
+    #     if not instance.cust_sno:
+    #         instance.order_id= unique_cust_sno_generator(instance)
+
+
+    #     pre_save.connect(pre_save_create_cust_sno, sender=Invoice)
     
     # @property
     # def total(self,*args,**kwargs):
@@ -64,6 +80,9 @@ class PurchaseOrder(models.Model):  # for vendors
 
     def __str__(self):
         return self.vendor_name
+
+    class Meta:
+        verbose_name_plural = 'purchaseOrder'
     
 
 # interdependancies are pending

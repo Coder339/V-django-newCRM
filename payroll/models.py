@@ -5,15 +5,18 @@ from authentication.models import EmployeeProfile
 
 
 
-class SalaryPackage(models.Model):  #static
-    Id              = models.CharField(verbose_name = 'packageId',max_length=50, primary_key=True)
-    EmpId           = models.ForeignKey(EmployeeProfile, on_delete=models.CASCADE)
-    package_amount  = models.IntegerField()
-    description     = models.TextField(max_length=250)
-    isActive        = models.BooleanField(default='true')
+# class SalaryPackage(models.Model):  #static
+#     Id              = models.CharField(verbose_name = 'packageId',max_length=50, primary_key=True)
+#     EmpId           = models.ForeignKey(EmployeeProfile, on_delete=models.CASCADE)
+#     package_amount  = models.IntegerField()
+#     description     = models.TextField(max_length=250)
+#     isActive        = models.BooleanField(default='true')
 
-    def __str__(self):
-        return self.Id
+#     def __str__(self):
+#         return self.Id
+
+#     class Meta:
+#         verbose_name_plural = 'salaryPackage'
     
 
 class EmployeePackage(models.Model):  # to be send
@@ -25,7 +28,8 @@ class EmployeePackage(models.Model):  # to be send
 
     Name                  = models.CharField(max_length=20,null=True)
     empId                 = models.ForeignKey(EmployeeProfile,on_delete=models.CASCADE,null=True,default = 1)
-    packageId             = models.ForeignKey(SalaryPackage,on_delete=models.CASCADE,null=True,editable=False)
+    pacckageId            = models.CharField(max_length=20,null=True)
+    # packageId             = models.ForeignKey(SalaryPackage,on_delete=models.CASCADE,null=True,editable=False)
     salary                = models.IntegerField()  # paid_amount
     # salaryMonth     = models.CharField(max_length=20,choices=months,null=True)
     dateOfPayment         = models.DateField(null=True)
@@ -37,10 +41,14 @@ class EmployeePackage(models.Model):  # to be send
     def __str__(self):
         return self.Name
 
+    class Meta:
+        verbose_name_plural = 'employeeSalary'
+
 class MonthlySalary(models.Model):  #dynamic
     # userId          = models.CharField(max_length=20, primary_key=True)
     EmpId                      = models.ForeignKey(EmployeeProfile,on_delete=models.CASCADE,null=True)
-    salaryId                   = models.ForeignKey(SalaryPackage, on_delete=models.CASCADE,editable=False,null=True)
+    salaryMonth                = models.DateField(null=True)
+    salaryId                   = models.ForeignKey(EmployeePackage, on_delete=models.CASCADE,editable=False,null=True)
     activeDays                 = models.PositiveIntegerField()
     workingDays                = models.PositiveIntegerField()
     # paymentReceipt  = models.ForeignKey(UserPaymentReceipt, on_delete=models.CASCADE)
@@ -48,6 +56,9 @@ class MonthlySalary(models.Model):  #dynamic
 
     def __str__(self):
         return self.EmpId.employee_id
+
+    class Meta:
+        verbose_name_plural = 'monthlySalary'
     
     
 

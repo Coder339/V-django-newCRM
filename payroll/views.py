@@ -10,24 +10,24 @@ from rest_framework.generics import (
 )
 
                                                   # UserPaymentReceipt View
-class CreateUserSalaryPackageView(CreateAPIView): 
-    queryset                = SalaryPackage.objects.all()
-    serializer_class        = SalaryPackageSerializer
-    permission_classes      =   []
-    authentication_classes  =   []
+# class CreateUserSalaryPackageView(CreateAPIView): 
+#     queryset                = SalaryPackage.objects.all()
+#     serializer_class        = SalaryPackageSerializer
+#     permission_classes      =   []
+#     authentication_classes  =   []
 
-class ListUserSalaryPackageView(ListAPIView):
-    queryset                = SalaryPackage.objects.all()
-    serializer_class        = SalaryPackageSerializer
-    permission_classes      =   []
-    authentication_classes  =   []
+# class ListUserSalaryPackageView(ListAPIView):
+#     queryset                = SalaryPackage.objects.all()
+#     serializer_class        = SalaryPackageSerializer
+#     permission_classes      =   []
+#     authentication_classes  =   []
 
-class UpdateUserPaymentReceiptView(UpdateAPIView):
-    queryset                = MonthlySalary.objects.all()
-    serializer_class        = SalaryPackageSerializer
-    permission_classes      =   []
-    authentication_classes  =   []
-    lookup_field            = 'paymentId'
+# class UpdateUserPaymentReceiptView(UpdateAPIView):
+#     queryset                = MonthlySalary.objects.all()
+#     serializer_class        = SalaryPackageSerializer
+#     permission_classes      =   []
+#     authentication_classes  =   []
+#     lookup_field            = 'paymentId'
 
                                                       # EmployeePackage view
 class CreateEmployeePackageView(CreateAPIView): 

@@ -1,10 +1,10 @@
 from rest_framework import serializers
 from .models import *
 
-class SalaryPackageSerializer(serializers.ModelSerializer):
-    class Meta:
-        model  = SalaryPackage
-        fields = '__all__'
+# class SalaryPackageSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model  = SalaryPackage
+#         fields = '__all__'
 
 
 class EmployeePackageSerializer(serializers.ModelSerializer):
