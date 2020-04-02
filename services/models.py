@@ -20,11 +20,14 @@ class Service(models.Model) :
     Type          = models.CharField(verbose_name='Type',max_length=20, blank = False,default='Unknown',null = True)
     # code          = models.CharField(max_length=100)
     description   = models.CharField(max_length=100)
-    cost          = models.IntegerField()
+    cost          = models.FloatField()
     isActive      = models.BooleanField(default='true')
 
     def __str__(self):
         return self.serviceId 
+
+    class Meta:
+        verbose_name_plural = 'Service'
     
 
 class Plan(models.Model):
@@ -39,17 +42,20 @@ class Plan(models.Model):
     # ('UNKNOWN','Unknown')
 )
     
-    planId        = models.CharField(max_length=30, primary_key=True,blank=False)   
-    Type          = models.CharField(max_length=20,choices=types,null=True)
-    plan          = models.CharField(verbose_name='plan',max_length=20,null = True)
-    validity      = models.DateField(null=True)
-    dateOfBooking = models.DateField(null=True)
-    dateOfBill    = models.DateField(null=True)
-    dueDate       = models.DateField(null=True)
-    terms         = models.TextField(max_length=250,verbose_name='PlanTerms',null=True)
+    planId         = models.CharField(max_length=30, primary_key=True,blank=False)   
+    Type           = models.CharField(max_length=20,choices=types,null=True)
+    duration       = models.CharField(max_length=20,null = True)
+    dateOfCreation = models.DateField(null=True)
+    validity       = models.DateField(null=True)
+    billingCycle   = models.DateField(null=True)
+    dueDate        = models.DateField(null=True)
+    terms          = models.TextField(max_length=250,verbose_name='PlanTerms',null=True)
 
     def __str__(self):
         return self.planId
+
+    class Meta:
+        verbose_name_plural = 'plan'
     
 
 
@@ -63,6 +69,9 @@ class Product(models.Model):
 
     def __str__(self):
         return self.Product_no
+    
+    class Meta:
+        verbose_name_plural = 'product'
 
 
 ##################################################################################################
@@ -73,9 +82,10 @@ class ServiceEntry(models.Model):
     service                = models.ForeignKey(Service,on_delete=models.CASCADE,null=True)
     description            = models.CharField(max_length=250, blank=False, null=True)    
     # price                  = models.DecimalField(max_digits=20, decimal_places=2, blank=True, null=True)
-    Qty                    = models.IntegerField()
-    Discount               = models.IntegerField()
-    Tax                    = models.IntegerField()
+    rate                   = models.FloatField()
+    Qty                    = models.FloatField()
+    Discount               = models.FloatField()
+    Tax                    = models.FloatField()
     # SubTotal               = models.IntegerField()
 
                                                             #--------------------FOR PRODUCT INLINE
@@ -84,10 +94,11 @@ class ProductEntry(models.Model):
     Product                = models.ForeignKey(Product,on_delete=models.CASCADE,null=True)
     description            = models.CharField(max_length=250, blank=False, null=True)
     # price                  = models.DecimalField(max_digits=20,decimal_places=2, blank=True, null=True)
-    Qty                    = models.IntegerField()
-    Discount               = models.IntegerField()
-    Tax                    = models.IntegerField()
-    # SubTotal               = models.IntegerField()
+    rate                   = models.FloatField()    
+    Qty                    = models.FloatField()
+    Discount               = models.FloatField()
+    Tax                    = models.FloatField()
+    # SubTotal               = models.IntFloatFieldegerField()
     # payment_terms          = models.TextField(max_length=250, blank=False, null=True)
 
     

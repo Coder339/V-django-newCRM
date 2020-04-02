@@ -1,49 +1,39 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from authentication.models import *
-
+import datetime
 stage=( ('PLANNING','Planning'), ('DEVELOPMENT','Development'),('TESTING','Testing'),
-              ('DEPLOYMENT','Deployment'),('COMPLETED','Completed'))
+              ('EXECUTION','Execution'),('COMPLETION','Completion'))
 class Business_opportunity(models.Model):
-
-       project_name            =               models.CharField(max_length=100,blank=False,null=False,default='')
+       Company_name            =               models.CharField(max_length=100,blank=False,null=False)
+       Project_name            =               models.CharField(max_length=100,blank=False,null=False)
        description             =               models.TextField(max_length=300,blank=False,null=False)
-       company_name            =               models.CharField(max_length=100, blank=False, null=False)
-       address                 =               models.CharField(max_length=100, blank=False, null=False)
-       email_id                =               models.EmailField(max_length=100, blank=False, null=False,default='')
-       phone_no                =               models.CharField(max_length=100,blank=False,null=False,default='')
-       additional_contact      =               models.CharField(max_length=300,blank=False,null='False',default='')
-       details                 =               models.CharField(verbose_name='',max_length=300,blank=False,null='False')
-       start_date              =               models.DateField()
-       deadline                =               models.DateField()
-       responsible_person      =               models.ForeignKey(EmployeeProfile,on_delete=models.CASCADE,default='',null=True)
-       followup_date           =               models.DateField()
-       upload_documents        =               models.FileField(default='')
+       start_date              =               models.DateTimeField()
+       deadline                =               models.DateTimeField()
+       employee_name           =               models.ForeignKey(EmployeeProfile,on_delete=models.CASCADE,default='',null=True)
+       followup_date           =               models.DateTimeField()
 
        class Meta():
-              verbose_name_plural='Business Opportunity'
+              verbose_name_plural='Business_opportunity'
 
 class Project(models.Model):
        project_name            =               models.CharField(max_length=100,blank=False,null=False)
        description             =               models.TextField(max_length=300, blank=False, null=False)
-       start_date              =               models.DateField()
-       deadline                =               models.DateField()
+       start_date              =               models.DateTimeField()
+       deadline                =               models.DateTimeField()
        owner                   =               models.CharField(max_length=100,blank=False,null=False)
        team_lead               =               models.CharField(max_length=100, blank=False, null=False)
        team_members            =               models.ForeignKey(EmployeeProfile,on_delete=models.CASCADE,null=True)
        task_assigned           =               models.CharField(max_length=300,blank=False,default='')
-       project_status          =               models.CharField(choices=stage,max_length=200,blank=False,null=False,default='')
-
+       current_stage           =               models.CharField(choices=stage,max_length=200,blank=False,null=False)
        
        class Meta():
               verbose_name_plural='Project'
 
 class TodoList(models.Model):
     employee_name               =              models.ForeignKey(EmployeeProfile,on_delete=models.CASCADE,null=True)
-    project                     =              models.CharField(max_length=300,blank=False,null='False')
-    task                        =              models.CharField(max_length=300,blank=False,null='False')
     update                      =              models.CharField(max_length=300,blank=False,null='False')
     
     class Meta():
-           verbose_name_plural = 'Employee Report'
+           verbose_name_plural = 'TodoList'
 
