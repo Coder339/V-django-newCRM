@@ -25,6 +25,9 @@ class Service(models.Model) :
 
     def __str__(self):
         return self.serviceId 
+
+    class Meta:
+        verbose_name_plural = 'Service'
     
 
 class Plan(models.Model):
@@ -39,17 +42,20 @@ class Plan(models.Model):
     # ('UNKNOWN','Unknown')
 )
     
-    planId        = models.CharField(max_length=30, primary_key=True,blank=False)   
-    Type          = models.CharField(max_length=20,choices=types,null=True)
-    plan          = models.CharField(verbose_name='plan',max_length=20,null = True)
-    validity      = models.DateField(null=True)
-    dateOfBooking = models.DateField(null=True)
-    dateOfBill    = models.DateField(null=True)
-    dueDate       = models.DateField(null=True)
-    terms         = models.TextField(max_length=250,verbose_name='PlanTerms',null=True)
+    planId         = models.CharField(max_length=30, primary_key=True,blank=False)   
+    Type           = models.CharField(max_length=20,choices=types,null=True)
+    duration           = models.CharField(verbose_name='plan',max_length=20,null = True)
+    dateOfCreation = models.DateField(null=True)
+    validity       = models.DateField(null=True)
+    billingCycle   = models.DateField(null=True)
+    dueDate        = models.DateField(null=True)
+    terms          = models.TextField(max_length=250,verbose_name='PlanTerms',null=True)
 
     def __str__(self):
         return self.planId
+
+    class Meta:
+        verbose_name_plural = 'plan'
     
 
 
@@ -63,6 +69,9 @@ class Product(models.Model):
 
     def __str__(self):
         return self.Product_no
+    
+    class Meta:
+        verbose_name_plural = 'product'
 
 
 ##################################################################################################

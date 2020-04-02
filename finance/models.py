@@ -28,6 +28,9 @@ class Invoice(models.Model):  # for customers
     def __str__(self):
         return self.customer_name
 
+    class Meta:
+        verbose_name_plural = 'invoice'
+
     # def __str__(self):
     #     return self.cust_sno
 
@@ -77,6 +80,9 @@ class PurchaseOrder(models.Model):  # for vendors
 
     def __str__(self):
         return self.vendor_name
+
+    class Meta:
+        verbose_name_plural = 'purchaseOrder'
     
 
 # interdependancies are pending
