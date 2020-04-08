@@ -71,3 +71,27 @@ class UpdateUserMonthlySalaryBillView(UpdateAPIView):
     
 
 
+
+def payroll(request):
+    return render(request,'payroll/dashboard.html')
+
+
+def empsalary(request):
+    packages = EmployeePackage.objects.all()
+    context = {'packages':packages}
+    return render(request,'payroll/empsalary.html',context)
+
+
+def empsalinfo(request,pk):
+    package = EmployeePackage.objects.get(id=pk)
+    return render(request,'payroll/empsalinfo.html',{'package':package})
+
+def monthsal(request):
+    salaries = MonthlySalary.objects.all()
+    context = {'salaries':salaries}
+    return render(request,'payroll/monthsal.html',context)
+
+
+def monthsalinfo(request,pk):
+    salary = MonthlySalary.objects.get(id=pk)
+    return render(request,'payroll/monthsalinfo.html',{'salary':salary})

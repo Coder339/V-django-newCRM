@@ -14,5 +14,12 @@ urlpatterns = [
     path('role/add/',views.CreateStaffProfileView.as_view(),name = 'add'),
     path('role/<pk>/edit/',views.UpdateStaffProfileView.as_view(),name = 'put'),
     
+    path('',views.hr,name='hr'),
+
+    path('dept/', views.dept, name = 'dept'),
+    path('dept/<pk>/', views.deptinfo, name = 'deptinfo'),
+
+    path('staff/', views.staff, name = 'staff'),
+    path('staff/<pk>/', views.staffinfo, name = 'staffinfo'),
 
 ]
