@@ -45,27 +45,26 @@ class UpdateStaffProfileView(UpdateAPIView):
     
 
 
-#                                         # StaffRole view
-# class CreateStaffRoleView(CreateAPIView):
-#     queryset = StaffRole.objects.all()
-#     serializer_class = StaffRoleSerializer
-#     permission_classes      =   []
-#     authentication_classes  =   []
-
-# class ListStaffRoleView(ListAPIView):
-#     queryset = StaffRole.objects.all()
-#     serializer_class = StaffRoleSerializer
-#     permission_classes      =   []
-#     authentication_classes  =   []
-
-# class UpdateStaffRoleView(UpdateAPIView):
-#     queryset = StaffRole.objects.all()
-#     serializer_class = StaffRoleSerializer
-#     permission_classes      =   []
-#     authentication_classes  =   []
-#     lookup_field = 'pk'
+def hr(request):
+    return render(request,'hr/dashboard.html')
 
 
+def dept(request):
+    depts = Department.objects.all()
+    context = {'depts':depts}
+    return render(request,'hr/dept.html',context)
 
 
+def deptinfo(request,pk):
+    dept = Department.objects.get(id=pk)
+    return render(request,'hr/deptinfo.html',{'dept':dept})
 
+def staff(request):
+    staffs = StaffProfile.objects.all()
+    context = {'staffs':staffs}
+    return render(request,'hr/staff.html',context)
+
+
+def staffinfo(request,pk):
+    staff = StaffProfile.objects.get(id=pk)
+    return render(request,'hr/staffinfo.html',{'staff':staff})

@@ -42,7 +42,7 @@ class EmployeeProfile(models.Model):
     
     first_name     = models.CharField(max_length=150, blank=False, null=True)
     last_name      = models.CharField(max_length=150, blank=False, null=True)
-    username       = models.OneToOneField(User, on_delete=models.CASCADE,default='')
+    username       = models.ForeignKey(User, on_delete=models.CASCADE,default='')
     # username       = models.CharField(max_length=20, primary_key=True)
     email_id       = models.EmailField(max_length=150, blank=False, null=True)
     # password     = models.CharField(max_length=100)
