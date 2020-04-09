@@ -14,6 +14,12 @@ urlpatterns = [
     path('salary/add/',views.CreateUserMonthlySalaryView.as_view(),name = 'add'),
     path('salary/<pk>/edit/',views.UpdateUserMonthlySalaryBillView.as_view(),name = 'put'),
     
+    path('',views.payroll,name='payroll'),
 
+    path('empsal/', views.empsalary, name = 'empsal'),
+    path('empsal/<pk>/', views.empsalinfo, name = 'empsalinfo'),
+
+    path('monthsal/', views.monthsal, name = 'monthsal'),
+    path('monthsal/<pk>/', views.monthsalinfo, name = 'monthsalinfo'),
 ]
 

@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 
-class ProjectmanagementConfig(AppConfig):
+class ProjectManagementConfig(AppConfig):
     name = 'ProjectManagement'

@@ -12,6 +12,7 @@ from django.contrib.auth.models import Group
 from django.contrib import admin
 from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin
+# from django.contrib.admin import AdminSite
 
 from .forms import CustomUserCreationForm, CustomUserChangeForm
 from .models import User
@@ -19,8 +20,7 @@ from .models import User
 
 admin.site.unregister(Group)
 admin.site.register(EmployeeProfile)
-admin.site.register(Customer)
-admin.site.register(Vendor)
+
 admin.site.register(Company)
 
 class CustomUserAdmin(UserAdmin):
@@ -38,3 +38,29 @@ admin.site.register(User, CustomUserAdmin)
 #     formfield_overrides = {
 #         models.ManyToManyField: {'widget': CheckboxSelectMultiple},
 #     }
+
+class CustomerAdmin(admin.ModelAdmin):
+                
+    class Meta:
+        model = Customer
+        
+    readonly_fields = ['customer_ID']
+    
+    def customer_ID(self,obj):
+        return  str(obj.first_name) + str(obj.id)
+
+
+class VendorAdmin(admin.ModelAdmin):
+                
+    class Meta:
+        model = Vendor
+        
+    readonly_fields = ['vendor_ID']
+    
+    def vendor_ID(self,obj):
+        return  str(obj.first_name) + str(obj.id)
+
+
+
+admin.site.register(Customer,CustomerAdmin)
+admin.site.register(Vendor,VendorAdmin)

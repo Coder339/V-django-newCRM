@@ -1,4 +1,4 @@
-# from django.shortcuts import render
+from django.shortcuts import render
 
 # from django.contrib.auth.decorators import login_required
 
@@ -36,3 +36,7 @@
 #         """
 #         usernames = [user.username for user in User.objects.all()]
 #         return Response(usernames)
+
+
+def home(request):
+    return render(request,'crm/dashboard.html')
