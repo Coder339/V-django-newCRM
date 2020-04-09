@@ -42,6 +42,10 @@ class Project(models.Model):
 #class team_members(model.Model):
        #TeamMenbers             =               models.
 
+       def __str__(self):
+           return self.project_name
+
+
 
 class TodoList(models.Model):
     employee_name               =              models.ForeignKey(EmployeeProfile,on_delete=models.CASCADE,null=True)
