@@ -6,6 +6,8 @@ class InvoiceSerializer(serializers.ModelSerializer):
         model  = Invoice
         fields = '__all__'
 
+        read_only_fields = ['user']
+
 
 class PurchaseOrderSerializer(serializers.ModelSerializer):
     class Meta:

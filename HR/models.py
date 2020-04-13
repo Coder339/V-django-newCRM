@@ -31,7 +31,7 @@ class StaffProfile(models.Model):  # dynamic
     # sick_days              = models.PositiveIntegerField()
     no_of_holidays_allowed    = models.IntegerField()
     package                   = models.IntegerField()
-    joined_date               = models.DateField(null=True)
+    Joining_date              = models.DateField(null=True)
     description               = models.TextField(blank=True, default='')
     # end_date               = models.DateField(null=True)  # on contract basis : bond duration
     isactive                  = models.BooleanField(default=False)

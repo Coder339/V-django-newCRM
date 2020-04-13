@@ -28,7 +28,7 @@ class EmployeePackage(models.Model):  # to be send
 
     Name                  = models.CharField(max_length=20,null=True)
     empId                 = models.ForeignKey(EmployeeProfile,on_delete=models.CASCADE,null=True,default = 1)
-    pacckageId            = models.CharField(max_length=20,null=True)
+    packageId            = models.CharField(max_length=20,null=True)
     # packageId             = models.ForeignKey(SalaryPackage,on_delete=models.CASCADE,null=True,editable=False)
     salary                = models.IntegerField()  # paid_amount
     # salaryMonth     = models.CharField(max_length=20,choices=months,null=True)

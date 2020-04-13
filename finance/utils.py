@@ -1,17 +1,15 @@
-import random
-import string
+# Arithmatic Operations Logics (*,+,/,-)
 
+from django.shortcuts import render,redirect
+from .models import *
+from services.models import *
 
-def random_string_generator(size=10, chars=string.ascii_lowercase + string.digits):
-    return ''.join(random.choice(chars) for _ in range(size))
-
-
-def unique_cust_sno_generator(instance):
-    cust_new_id= random_string_generator()
-
-    Klass= instance.__class__
-
-    qs_exists= Klass.objects.filter(order_id= cust_new_id).exists()
-    if qs_exists:
-        return unique_cust_sno_generator(instance)
-    return cust_new_id
+def total(request,pk,*args,**kwargs):
+    invoice = Invoice.objects.get(id = pk)
+    qs = invoice.serviceentry_set.all()
+    s = 0
+    for q in qs.iterator():
+        s += q.rate
+    
+    context = {'sum': s}
+    return render(request,'finance/invinfo.html',context)

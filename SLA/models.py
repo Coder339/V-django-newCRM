@@ -10,8 +10,8 @@ stage=(('INITIATED','Initiated'),('IN PROGRESS','In Progress'),
        ('RESOLVED','Resolved'))
 
 class SLA(models.Model):
-    customer_details        =               models.ManyToManyField(Customer)
-    ticket_no               =               models.AutoField(primary_key=True)
+    customer_details        =               models.ForeignKey(Customer,on_delete=models.CASCADE,default='',null=True)
+    ticket_no               =               models.IntegerField()
     problem_details         =               models.TextField(blank='False', null='False')
     priority                =               models.CharField(choices=priority,max_length=200)
     date                    =               models.DateField()
@@ -21,16 +21,7 @@ class SLA(models.Model):
     class Meta():
         verbose_name_plural = 'SLA'
 
-    def __str__(self):
-        return self.problem_details
-
-
-#class History(model.Model):
-    #customer_name             =             model.ForeignKey(Customer,on_delete=models.CASCADE,null=True,verbose_name='Customer')
-
-
-
-    #def __str__(self,*agrs,**kwargs):
-        #return self.customer_details.ticket_no
+    def __str__(self,*agrs,**kwargs):
+        return self.customer_details.first_name
     
     
