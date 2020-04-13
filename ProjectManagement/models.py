@@ -37,10 +37,12 @@ class Project(models.Model):
        team_members            =               models.ManyToManyField(EmployeeProfile)
        task_assigned           =               models.CharField(max_length=300,blank=False,default='')
        project_status          =               models.CharField(choices=stage,max_length=200,blank=False,null=False,default='')
-       #selected                =               models.Boolean
 
-#class team_members(model.Model):
-       #TeamMenbers             =               models.
+       class Meta():
+              verbose_name_plural='Project'
+
+       def __str__(self):
+              return self.project_name
 
 
 class TodoList(models.Model):
