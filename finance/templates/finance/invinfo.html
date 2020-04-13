@@ -9,8 +9,8 @@
 		<div class="card card-body">
 			<h5>INVOICE :&ensp; {{invoice.Invoice_number}}</h5>
 			<hr>
-			<a class="btn btn-outline-info  btn-sm btn-block" href="">Update Invoice</a>
-			<a class="btn btn-outline-danger  btn-sm btn-block" href="">Delete Invoice</a>
+			<a class="btn btn-outline-info  btn-sm btn-block" href="{% url 'update_invoice' invoice.id %}">Update Invoice</a>
+			<a class="btn btn-outline-danger  btn-sm btn-block" href="{% url 'delete_invoice' invoice.id %}">Delete Invoice</a>
 
 		</div>
 	</div>
@@ -74,8 +74,10 @@
                                     <td>{{entry.Qty}}</td>
                                     <td>{{entry.Discount}}</td>
                                     <td>{{entry.Tax}}</td>
-                                    <td><a class="btn btn-sm btn-info" href="">Update</a></td>
-                                    <td><a class="btn btn-sm btn-danger" href="">Remove</a></td>
+                                    <td><a class="btn btn-sm btn-info" href="{% url 'update_inentry' entry.id %}">Update</a></td>
+                                    <td><a class="btn btn-sm btn-danger" href="{% url 'delete_inentry' entry.id %}">Remove</a></td>
+                                
+
                                 </tr>
                                 {% endfor %}
 
@@ -85,10 +87,13 @@
                 </div>
             </div>
             <hr>
-            <div>
+            <div class="row">
                 <div class="col-md">
-                    <h6>Total</h6>
-                </div>
+                    <a class="btn btn-sm btn-info" href="" >ADD Service</a>
+                </div>  
+                <div class="col-md-4">
+                    <h6>Total: ${{sum}}</h6>
+                </div>   
             </div>
         </div>
 

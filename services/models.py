@@ -21,13 +21,17 @@ class Service(models.Model) :
     # code          = models.CharField(max_length=100)
     description   = models.CharField(max_length=100)
     cost          = models.FloatField()
-    isActive      = models.BooleanField(default='true')
-
+    Active        = models.BooleanField(default='True')
+    
+    
     def __str__(self):
         return self.serviceId 
+    
+    
 
     class Meta:
         verbose_name_plural = 'Service'
+        
     
 
 class Plan(models.Model):
@@ -88,6 +92,9 @@ class ServiceEntry(models.Model):
     Tax                    = models.FloatField()
     # SubTotal               = models.IntegerField()
 
+    def __str__(self):
+        return str(self.service)
+
                                                             #--------------------FOR PRODUCT INLINE
 class ProductEntry(models.Model):
     PO                     = models.ForeignKey(PurchaseOrder,on_delete=models.CASCADE,null=True)
@@ -101,6 +108,7 @@ class ProductEntry(models.Model):
     # SubTotal               = models.IntFloatFieldegerField()
     # payment_terms          = models.TextField(max_length=250, blank=False, null=True)
 
-    
+    def __str__(self):
+        return str(self.Product)
 
 

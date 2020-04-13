@@ -9,8 +9,8 @@
 		<div class="card card-body">
 			<h5>Product :&ensp; {{product.Product_no}}</h5>
 			<hr>
-			<a class="btn btn-outline-info  btn-sm btn-block" href="">Update Product</a>
-			<a class="btn btn-outline-danger  btn-sm btn-block" href="">Delete Product</a>
+			<a class="btn btn-outline-info  btn-sm btn-block" href="{% url 'updateproduct' product.id %}">Update Product</a>
+			<a class="btn btn-outline-danger  btn-sm btn-block" href="{% url 'delete_product' product.id %}">Delete Product</a>
 
 		</div>
 	</div>

@@ -37,7 +37,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # third party tools
     'rest_framework',
+    'bootstrapform',
+    'bootstrap4',
+    
+    'bootstrap_datepicker_plus',
+    # third party apps
     'authentication',
     'HR',
     'ProjectManagement',
@@ -45,10 +51,12 @@ INSTALLED_APPS = [
     'payroll',
     'SLA',
     'services',
+
     # 'multiselectfield',
 
 
 ]
+
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',

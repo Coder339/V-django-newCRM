@@ -9,8 +9,8 @@
 		<div class="card card-body">
 			<h5>MonthlySalary :&ensp; {{salary.EmpId}}</h5>
 			<hr>
-			<a class="btn btn-outline-info  btn-sm btn-block" href="">Update MonthlySalary</a>
-			<a class="btn btn-outline-danger  btn-sm btn-block" href="">Delete MonthlySalary</a>
+			<a class="btn btn-outline-info  btn-sm btn-block" href="{% url 'update_monthsal' salary.id %}">Update MonthlySalary</a>
+			<a class="btn btn-outline-danger  btn-sm btn-block" href="{% url 'delete_monthsal' salary.id %}">Delete MonthlySalary</a>
 
 		</div>
 	</div>

@@ -1,8 +1,6 @@
 from django.db import models
 from authentication.models import *
 from django.contrib.auth import get_user_model
-from .utils import unique_cust_sno_generator
-from django.db.models.signals import pre_save
 # from django.db.models import F
 # from services.models import *
 
@@ -30,6 +28,9 @@ class Invoice(models.Model):  # for customers
     
     payment_terms          = models.TextField(max_length=250, blank=False, null=True)
     
+    # read_only_fields = ['total'] 
+    
+
     def __str__(self):
         return self.customer_name
 

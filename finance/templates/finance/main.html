@@ -9,9 +9,11 @@
     <link rel = 'stylesheet' type="text/css" href="{% static '/style.css' %}"/>
     <link href="/bootstrap4-glyphicons/css/bootstrap-glyphicons.min.css" rel="stylesheet" type="text/css" />
     <link href="/bootstrap4-glyphicons/maps/glyphicons-fontawesome.min.css" rel="stylesheet" type="text/css" />
-
-    
-
+ 
+                               
+      {# Embeds Bootstrap JS #}
+    {% block extrahead %}       {# Embeds Extra Resources #}
+    {% endblock %} 
 </head>
 <body>
     {% include "finance/navbar.html" %}

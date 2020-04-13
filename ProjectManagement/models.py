@@ -23,10 +23,6 @@ class Business_opportunity(models.Model):
        class Meta():
               verbose_name_plural='Business Opportunity'
 
-       def __str__(self):
-              return self.company_name
-
-
 class Project(models.Model):
        project_name            =               models.CharField(max_length=100,blank=False,null=False)
        description             =               models.TextField(max_length=300, blank=False, null=False)
@@ -34,18 +30,13 @@ class Project(models.Model):
        deadline                =               models.DateField()
        owner                   =               models.CharField(max_length=100,blank=False,null=False)
        team_lead               =               models.CharField(max_length=100, blank=False, null=False)
-       team_members            =               models.ManyToManyField(EmployeeProfile)
+       team_members            =               models.ForeignKey(EmployeeProfile,on_delete=models.CASCADE,null=True)
        task_assigned           =               models.CharField(max_length=300,blank=False,default='')
        project_status          =               models.CharField(choices=stage,max_length=200,blank=False,null=False,default='')
-       #selected                =               models.Boolean
 
-#class team_members(model.Model):
-       #TeamMenbers             =               models.
-
-       def __str__(self):
-           return self.project_name
-
-
+       
+       class Meta():
+              verbose_name_plural='Project'
 
 class TodoList(models.Model):
     employee_name               =              models.ForeignKey(EmployeeProfile,on_delete=models.CASCADE,null=True)
@@ -55,9 +46,4 @@ class TodoList(models.Model):
     
     class Meta():
            verbose_name_plural = 'Employee Report'
-
-
-    def __str__(self):
-        return self.employee_name
-
 

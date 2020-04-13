@@ -9,8 +9,8 @@
 		<div class="card card-body">
 			<h5>PO NUMBER :&ensp; {{po.PO_Number}}</h5>
 			<hr>
-			<a class="btn btn-outline-info  btn-sm btn-block" href="">Update PO</a>
-			<a class="btn btn-outline-danger  btn-sm btn-block" href="">Delete PO</a>
+			<a class="btn btn-outline-info  btn-sm btn-block" href="{% url 'update_po' po.id %}">Update PO</a>
+			<a class="btn btn-outline-danger  btn-sm btn-block" href="{% url 'delete_po' po.id %}">Delete PO</a>
 
 		</div>
 	</div>
@@ -73,8 +73,8 @@
                                     <td>{{entry.Qty}}</td>
                                     <td>{{entry.Discount}}</td>
                                     <td>{{entry.Tax}}</td>
-                                    <td><a class="btn btn-sm btn-info" href="">Update</a></td>
-                                    <td><a class="btn btn-sm btn-danger" href="">Remove</a></td>
+                                    <td><a class="btn btn-sm btn-info" href="{% url 'update_poentry' entry.id %}">Update</a></td>
+                                    <td><a class="btn btn-sm btn-danger" href="{% url 'delete_poentry' entry.id %}">Remove</a></td>
                                 </tr>
                                 {% endfor %}
                             </table>
@@ -83,12 +83,13 @@
                 </div>
             </div>
             <hr>
-            <div>
+            <div class="row">
                 <div class="col-md">
-                    <div class="card card-body">
-                        <h6>Total</h6>
-                    </div>
-                </div>
+                    <a class="btn btn-sm btn-info" href="" >ADD Product</a>
+                </div>  
+                <div class="col-md-4">
+                    <h6>Total: ${{sum}}</h6>
+                </div>   
             </div>
             
         </div>

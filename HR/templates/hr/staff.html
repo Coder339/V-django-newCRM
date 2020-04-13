@@ -9,7 +9,7 @@
             <h5>Staffs:</h5>
             <hr>
             <div class="card card-body">
-                <a class="btn btn-primary  btn-sm btn-block" href="">Add Staff</a>
+                <a class="btn btn-primary  btn-sm btn-block" href="{% url 'createstaff' %}">Add Staff</a>
                 <table class="table table-sm">
                     <tr>
                         <th></th>
@@ -21,7 +21,7 @@
                         <tr>
                             <td><a class="btn btn-sm btn-info" href="{% url 'staffinfo' staff.id %}">View</a></td>
                             <td>{{staff.EmpId}}</td>
-                            <td>{{staff.joined_date}}</td>
+                            <td>{{staff.Joining_date}}</td>
                         </tr>
                     {% endfor %}
 

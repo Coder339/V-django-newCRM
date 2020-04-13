@@ -9,19 +9,19 @@
             <h5>MonthSalary:</h5>
             <hr>
             <div class="card card-body">
-                <a class="btn btn-primary  btn-sm btn-block" href="">Add MonthSalary</a>
+                <a class="btn btn-primary  btn-sm btn-block" href="{% url 'create_sal' %}">Add MonthSalary</a>
                 <table class="table table-sm">
                     <tr>
                         <th></th>
                         <th>EmpId</th>
-                        <th>SalaryId</th>
+                        <th>Total Salary Amount</th>
                     </tr>
 
                     {% for salary in salaries %}
                         <tr>
                             <td><a class="btn btn-sm btn-info" href="{% url 'monthsalinfo' salary.id %}">View</a></td>
                             <td>{{salary.EmpId}}</td>
-                            <td>{{salary.salaryId}}</td>
+                            <td>{{salary.total_Salary_Amount}}</td>
                         </tr>
                     {% endfor %}
 

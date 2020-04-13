@@ -1,5 +1,5 @@
 
- {% extends 'service/main.html' %}
+{% extends 'service/main.html' %}
 
 {% block content %}
 
@@ -10,7 +10,7 @@
             <h5>PLANS:</h5>
             <hr>
             <div class="card card-body">
-                <a class="btn btn-primary  btn-sm btn-block" href="">Create Plan</a>
+                <a class="btn btn-primary  btn-sm btn-block" href="{% url 'createplan' %}">Create Plan</a>
                 <table class="table table-sm">
                     <tr>
                         <th></th>
@@ -29,6 +29,16 @@
                 </table>
             </div>
         </div>
+        <div class="col">
+            <h6>Search Plan</h6>
+            <hr>
+            <div class="card card-body">
+                <form method="get">
+
+                <button class="btn btn-primary" type="submit">Search</button>
+                </form>
+            </div>
+	    </div>
 
     </div>
 

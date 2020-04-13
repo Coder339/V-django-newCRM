@@ -9,8 +9,8 @@
 		<div class="card card-body">
 			<h5>Staff :&ensp; {{staff.empId}}</h5>
 			<hr>
-			<a class="btn btn-outline-info  btn-sm btn-block" href="">Update Staff</a>
-			<a class="btn btn-outline-danger  btn-sm btn-block" href="">Delete Staff</a>
+			<a class="btn btn-outline-info  btn-sm btn-block" href="{% url 'update_staff' staff.id %}">Update Staff</a>
+			<a class="btn btn-outline-danger  btn-sm btn-block" href="{% url 'delete_staff' staff.id %}">Delete Staff</a>
 
 		</div>
 	</div>
