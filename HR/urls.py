@@ -1,18 +1,18 @@
 from django.urls import path
 from . import views
-
+from . import api
 urlpatterns = [
-    path('department',views.ListDepartmentView.as_view(),name = 'details'),
-    path('department/add/',views.CreateDepartmentView.as_view(),name = 'add'),
-    path('department/<deptId>/edit/',views.UpdateDepartmentView.as_view(),name = 'put'),
+    path('department',api.ListDepartmentView.as_view(),name = 'details'),
+    path('department/add/',api.CreateDepartmentView.as_view(),name = 'add'),
+    path('department/<deptId>/edit/',api.UpdateDepartmentView.as_view(),name = 'put'),
 
     # path('profile',views.ListStaffProfileView.as_view(),name = 'details'),
     # path('profile/add/',views.CreateStaffProfileView.as_view(),name = 'add'),
     # path('profile/<pk>/edit/',views.UpdateStaffProfileView.as_view(),name = 'put'),
 
-    path('role',views.ListStaffProfileView.as_view(),name = 'details'),
-    path('role/add/',views.CreateStaffProfileView.as_view(),name = 'add'),
-    path('role/<pk>/edit/',views.UpdateStaffProfileView.as_view(),name = 'put'),
+    path('role',api.ListStaffProfileView.as_view(),name = 'details'),
+    path('role/add/',api.CreateStaffProfileView.as_view(),name = 'add'),
+    path('role/<pk>/edit/',api.UpdateStaffProfileView.as_view(),name = 'put'),
     
     path('',views.hr,name='hr'),
 

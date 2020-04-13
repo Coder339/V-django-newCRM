@@ -28,7 +28,9 @@ class Invoice(models.Model):  # for customers
     
     payment_terms          = models.TextField(max_length=250, blank=False, null=True)
     
-    # read_only_fields = ['total'] 
+    # read_only_fields = ['sum'] 
+    
+
     
 
     def __str__(self):

@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from . import api
 
 urlpatterns = [
     # path('customer/',views.ListInvoiceView.as_view(),name = 'cust-details'),
