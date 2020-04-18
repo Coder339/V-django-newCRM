@@ -5,9 +5,10 @@ Welcome to the Customer Relational Management! This project is about improving b
 ### This project contains the following modules.
 - Accounts
 - Finance
-- Business Development
+- Project Management
 - HR
 - Payroll
+- Service
 - SLA
 
  Accounts.
