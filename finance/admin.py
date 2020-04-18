@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Invoice,PurchaseOrder
+from .models import *
 from services.models import *
 from django.db.models import Sum,F
 
@@ -11,7 +11,7 @@ from django.db.models import Sum,F
 
 class ServiceEntryInline(admin.TabularInline):
     model = ServiceEntry
-    extra = 0
+    extra = 1
 
     readonly_fields = ['unit_price','amount']              
     
@@ -30,6 +30,17 @@ class ServiceEntryInline(admin.TabularInline):
 
 class InvoiceAdmin(admin.ModelAdmin):
     inlines = [ServiceEntryInline]                        # ,ServiceTotalInline
+    
+    def save_model(self, request, obj, form, change):                            ######################### To save the child class before parent
+        if not obj.pk: # call super method if object has no primary key 
+            super(InvoiceAdmin, self).save_model(request, obj, form, change)
+        else:
+            pass # don't actually save the parent instance
+
+    def save_formset(self, request, form, formset, change):
+        formset.save() # this will save the children
+        form.instance.save()
+
     class Meta:
         model = Invoice
         fieldsets = (
@@ -42,24 +53,21 @@ class InvoiceAdmin(admin.ModelAdmin):
                      )
             }),
     )
-    readonly_fields = ['customer_ID','total']
+    # readonly_fields = ['customer_ID']  #,'total'
     
-    def customer_ID(self,obj):
-        return  str(obj.customer_name) + str(obj.from_company) + str(obj.id)
-      
-    def total(self,obj):
-        # q = Service.objects.aggregate(Sum('cost'))
-        # if obj.id:
-        #     return '$0'
-        
-    
-        qs = ServiceEntry.objects.all()
-        s = 0
-        for q in qs.iterator():
-            s += (q.rate * q.Qty) - (((q.Discount)/100) * (q.Qty * q.rate)) + q.Tax
-        
+    # def customer_ID(self,obj):
+    #     return  str(obj.customer_name) + str(obj.from_company) + str(obj.id)
+         
 
-        return "$" + str(s) 
+    # def total(self,obj,*args,**kwargs):         
+    #     invoice = Invoice.objects.get(id=obj.id)
+    #     entries = invoice.serviceentry_set.all()
+    #     s = 0
+    #     for q in entries.iterator():
+    #         s += (q.rate * q.Qty) - (((q.Discount)/100) * (q.Qty * q.rate)) + q.Tax
+
+
+    #     return "$" + str(s) 
 
     
         
@@ -68,7 +76,7 @@ class InvoiceAdmin(admin.ModelAdmin):
                                                   #----------------------------------FOR ADDING PRODUCTS
 class ProductEntryInline(admin.TabularInline):
     model = ProductEntry
-    extra = 0
+    extra = 1
     readonly_fields = ['unit_price','amount']
     
     def unit_price(self, obj):
@@ -84,6 +92,18 @@ class ProductEntryInline(admin.TabularInline):
 
 class POAdmin(admin.ModelAdmin):
     inlines = [ProductEntryInline]           # ,ProductTotalInline
+    
+    def save_model(self, request, obj, form, change):         ######################### To save the child class before parent
+        if not obj.pk: # call super method if object has no primary key 
+            super(POAdmin, self).save_model(request, obj, form, change)
+        else:
+            pass # don't actually save the parent instance
+
+    def save_formset(self, request, form, formset, change):
+        formset.save() # this will save the children
+        form.instance.save()
+
+
     class Meta:
         model = PurchaseOrder
         fieldsets = (
@@ -96,22 +116,24 @@ class POAdmin(admin.ModelAdmin):
                      )
             }),
     )
-    readonly_fields = ['vendor_ID','total']
+    readonly_fields = ['vendor_ID']      #,'total'
     
     def vendor_ID(self,obj):
         return  str(obj.vendor_name) + str(obj.from_company) + str(obj.id)
 
-    def total(self,obj):
-        # q = Service.objects.aggregate(Sum('cost'))
-        qs = ProductEntry.objects.all()
-        # ps = Service.objects.all()
-        s = 0
-        for q in qs.iterator():
-            s += (q.rate * q.Qty) - (((q.Discount)/100) * (q.Qty * q.rate)) + q.Tax
+    # def total(self,obj):
+    #     # q = Service.objects.aggregate(Sum('cost'))
+    #     qs = ProductEntry.objects.all()
+    #     # ps = Service.objects.all()
+    #     s = 0
+    #     for q in qs.iterator():
+    #         s += (q.rate * q.Qty) - (((q.Discount)/100) * (q.Qty * q.rate)) + q.Tax
         
 
-        return "$" + str(s) 
+    #     return "$" + str(s) 
 
 
 admin.site.register(Invoice,InvoiceAdmin)
 admin.site.register(PurchaseOrder,POAdmin)
+
+

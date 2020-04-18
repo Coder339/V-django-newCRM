@@ -1,22 +1,5 @@
 from django.db import models
 from authentication.models import EmployeeProfile
-
-
-
-
-
-# class SalaryPackage(models.Model):  #static
-#     Id              = models.CharField(verbose_name = 'packageId',max_length=50, primary_key=True)
-#     EmpId           = models.ForeignKey(EmployeeProfile, on_delete=models.CASCADE)
-#     package_amount  = models.IntegerField()
-#     description     = models.TextField(max_length=250)
-#     isActive        = models.BooleanField(default='true')
-
-#     def __str__(self):
-#         return self.Id
-
-#     class Meta:
-#         verbose_name_plural = 'salaryPackage'
     
 
 class EmployeePackage(models.Model):  # to be send
@@ -49,6 +32,8 @@ class MonthlySalary(models.Model):  #dynamic
     EmpId                      = models.ForeignKey(EmployeeProfile,on_delete=models.CASCADE,null=True)
     salaryMonth                = models.DateField(null=True)
     salaryId                   = models.ForeignKey(EmployeePackage, on_delete=models.CASCADE,editable=False,null=True)
+    unpaid_leaves              = models.PositiveIntegerField(null=True)
+    paid_leaves                = models.PositiveIntegerField(null=True)
     activeDays                 = models.PositiveIntegerField()
     workingDays                = models.PositiveIntegerField()
     # paymentReceipt  = models.ForeignKey(UserPaymentReceipt, on_delete=models.CASCADE)
@@ -65,6 +50,6 @@ class MonthlySalary(models.Model):  #dynamic
 
     
 
-# need some changes ^
+
 
 

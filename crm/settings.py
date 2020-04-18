@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'bootstrapform',
     'bootstrap4',
-    
+    'django_filters',
     'bootstrap_datepicker_plus',
     # third party apps
     'authentication',

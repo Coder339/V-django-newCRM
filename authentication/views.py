@@ -6,10 +6,26 @@ from .models import User,EmployeeProfile
 from django.contrib.auth import authenticate,login,get_user_model
 from rest_framework import generics
 from rest_framework.response import Response
+from .forms import *
 
 
 #################################################### F R O N T    E N D   VIEWS ##################
 
+def register(request):
+    form = CustomUserCreationForm()
+    if request.method == 'POST':
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('sign-in')
+    
+    context = {'form':form}
+    return render(request,'profile/register.html',context)
+    
+
+def login(request):
+    context = {}
+    return render(request,'profile/login.html',context)
 
 def profile(request):
     return render(request,'profile/dashboard.html')

@@ -2,7 +2,8 @@ from django.db import models
 from authentication.models import *
 from django.contrib.auth import get_user_model
 # from django.db.models import F
-# from services.models import *
+from services.models import *
+from django.db.models.signals import pre_save,post_save
 
 User = get_user_model()
 
@@ -28,10 +29,13 @@ class Invoice(models.Model):  # for customers
     
     payment_terms          = models.TextField(max_length=250, blank=False, null=True)
     
-    # read_only_fields = ['sum'] 
-    
+    Total                  = models.FloatField(blank=True, null=True)
 
     
+    
+    # def __init__(self,*args, **kwargs):
+    #     super(ServiceEntry,self).__init__(*args, **kwargs)
+
 
     def __str__(self):
         return self.customer_name
@@ -39,26 +43,29 @@ class Invoice(models.Model):  # for customers
     class Meta:
         verbose_name_plural = 'invoice'
 
-    # def __str__(self):
-    #     return self.cust_sno
 
+    ###################################################################################
 
-    # def pre_save_create_cust_sno(sender, instance, *args, **kwargs):
-    #     if not instance.cust_sno:
-    #         instance.order_id= unique_cust_sno_generator(instance)
+    # def save(self,*args,**kwargs):       ################ WILL NOT WORK IF YOU GOING TO INITIALIZE FIRST OBJECT
+    #     # super(ServiceEntry,self).save(*args, **kwargs)
+    #     invoice = Invoice.objects.get(id=self.id)
+    #     entries = invoice.serviceentry_set.all()
+    #     self.Total = 0
+    #     for q in entries.iterator():
+    #         self.Total += ((q.rate * q.Qty) - (((q.Discount)/100) * (q.Qty * q.rate)) + q.Tax )
 
+    #     # print(self.Total)
+    #     super(Invoice,self).save(*args, **kwargs)
 
-    #     pre_save.connect(pre_save_create_cust_sno, sender=Invoice)
-    
-    # @property
-    # def total(self,*args,**kwargs):
-    #     return self.cost + self.Tax
+def pre_save_Stotal(instance,sender,*args,**kwrags):
+    # invoice = Invoice.objects.get(id=instance.id)
+    entries = instance.serviceentry_set.all()
+    instance.Total = 0
+    for q in entries.iterator():
+        instance.Total += ((q.rate * q.Qty) - (((q.Discount)/100) * (q.Qty * q.rate)) + q.Tax)
 
-    # t = models.CharField(total(),max_length=50)
-    
+pre_save.connect(pre_save_Stotal, sender=Invoice)
 
-    
-    
 
     
 class PurchaseOrder(models.Model):  # for vendors
@@ -77,14 +84,10 @@ class PurchaseOrder(models.Model):  # for vendors
     # vendor_sn              = models.CharField(verbose_name = 'vendorID',max_length=20, blank=False,
                                             # null=True)  # format :- first client_name then vendor_name
     PO_Date                = models.DateField()
-    # Products               = models.ManyToManyField(Product)
-    # description            = models.TextField(max_length=250, blank=False, null=True)
-    # price                  = models.DecimalField(max_digits=20,decimal_places=2, blank=True, null=True)
-    # Qty                    = models.IntegerField()
-    # Discount               = models.IntegerField()
-    # Tax                    = models.IntegerField()
-    # SubTotal               = models.IntegerField()
-    # payment_terms          = models.TextField(max_length=250, blank=False, null=True)
+
+    Total                  = models.FloatField(blank=True, null=True)
+
+
 
     def __str__(self):
         return self.vendor_name
@@ -92,6 +95,68 @@ class PurchaseOrder(models.Model):  # for vendors
     class Meta:
         verbose_name_plural = 'purchaseOrder'
     
+def pre_save_Ptotal(instance,sender,*args,**kwrags):
+    # invoice = Invoice.objects.get(id=instance.id)
+    entries = instance.productentry_set.all()
+    instance.Total = 0
+    for q in entries.iterator():
+        instance.Total += ((q.rate * q.Qty) - (((q.Discount)/100) * (q.Qty * q.rate)) + q.Tax)
 
-# interdependancies are pending
-# need some changes
+pre_save.connect(pre_save_Ptotal, sender=PurchaseOrder)
+
+
+    # def save(self,*args,**kwargs):    ################ WILL NOT WORK IF YOU GOING TO INITIALIZE FIRST OBJECT
+    #     po = PurchaseOrder.objects.get(id=self.id)
+    #     entries = po.productentry_set.all()
+    #     self.PTotal = 0
+    #     for q in entries.iterator():
+    #         self.PTotal += ((q.rate * q.Qty) - (((q.Discount)/100) * (q.Qty * q.rate)) + q.Tax )
+        
+    
+    #     super(PurchaseOrder,self).save(*args, **kwargs)
+
+
+
+class ServiceEntry(models.Model):
+    invoice                = models.ForeignKey(Invoice,on_delete=models.CASCADE,null=True)
+    service                = models.ForeignKey(Service,on_delete=models.CASCADE,null=True)
+    description            = models.TextField(max_length=250, blank=False, null=True)    
+    # price                  = models.DecimalField(max_digits=20, decimal_places=2, blank=True, null=True)
+    rate                   = models.FloatField()
+    Qty                    = models.FloatField()
+    Discount               = models.FloatField()
+    Tax                    = models.FloatField()
+    # SubTotal               = models.IntegerField()
+
+    
+
+    
+
+    def __str__(self):
+        return str(self.service)
+    
+        
+                                                            #--------------------FOR PRODUCT INLINE
+class ProductEntry(models.Model):
+    PO                     = models.ForeignKey(PurchaseOrder,on_delete=models.CASCADE,null=True)
+    Product                = models.ForeignKey(Product,on_delete=models.CASCADE,null=True)
+    description            = models.TextField(max_length=250, blank=False, null=True)
+    # price                  = models.DecimalField(max_digits=20,decimal_places=2, blank=True, null=True)
+    rate                   = models.FloatField()    
+    Qty                    = models.FloatField()
+    Discount               = models.FloatField()
+    Tax                    = models.FloatField()
+
+    # payment_terms          = models.TextField(max_length=250, blank=False, null=True)
+
+    def __str__(self):
+        return str(self.Product)
+
+
+
+
+
+
+
+
+

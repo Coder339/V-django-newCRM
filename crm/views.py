@@ -1,4 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
+
+def home(request):
+    return render(request,'crm/dashboard.html')
+
 
 # from django.contrib.auth.decorators import login_required
 
@@ -36,7 +40,3 @@ from django.shortcuts import render
 #         """
 #         usernames = [user.username for user in User.objects.all()]
 #         return Response(usernames)
-
-
-def home(request):
-    return render(request,'crm/dashboard.html')
