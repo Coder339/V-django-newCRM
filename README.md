@@ -7,7 +7,7 @@ Welcome to the Customer Relational Management! This project is about improving b
 
 ### This project contains the following _modules_.
 _Modules are nothing but different App Names in which each has a different purpose._
-- Accounts
+- Authentications
 - Finance
 - Project Management
 - HR
