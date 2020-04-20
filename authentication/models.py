@@ -93,6 +93,7 @@ class EmployeeProfile(models.Model):
     
 
 
+
 # customeraccount
 class Customer(models.Model):
 #     personalId_choices = (
@@ -110,7 +111,8 @@ class Customer(models.Model):
     id_no             = models.CharField(verbose_name='',max_length=150, unique = True,blank=False, null=True)
     p_id1             = models.CharField(verbose_name='PersonalID',max_length=150, blank=False, null=True) # type of id
     p_id_link         = models.CharField(verbose_name='',max_length=500, blank=False, null=True, unique=True)                      #link of pid
-    contact           = models.CharField(verbose_name='PhoneNo.',max_length=20,blank=False, null=True)
+    contact           = models.CharField(verbose_name='PhoneNo.'
+                                                      '',max_length=20,blank=False, null=True)
     address_1         = models.CharField(max_length=150, blank=False, null=True)
     address_2         = models.CharField(max_length=150, blank=False, null=True)
     city              = models.CharField(max_length=150, blank=False, null=True)
@@ -133,7 +135,7 @@ class Customer(models.Model):
     # )
     
     def __str__(self):
-        return self.first_name
+        return (self.first_name)
 
     class Meta:
         verbose_name_plural = 'Customer'

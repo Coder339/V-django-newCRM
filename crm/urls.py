@@ -26,7 +26,7 @@ urlpatterns = [
     path('project/',include('ProjectManagement.urls')),
     path('hr/',include('HR.urls')),
     path('payroll/',include('payroll.urls')),
-    path('sla/',include('SLA.urls')),
+    path('sla/',include('ServiceLevelAgreement.urls')),
     path('service/',include('services.urls')),
     # path('users/', include('django.contrib.auth.urls')), # new
     path('admin/', admin.site.urls),

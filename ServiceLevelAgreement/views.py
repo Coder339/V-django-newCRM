@@ -4,22 +4,22 @@ from rest_framework import generics
 from .models import *
 from .serializer import *
 
-#SLA
+#ServiceLevelAgreement
 # class SLACreateAPIView(generics.CreateAPIView):
-#     queryset               =         SLA.objects.all()
+#     queryset               =         ServiceLevelAgreement.objects.all()
 #     serializers_class      =         SLASerializer
 #     permission_classes     =         []
 #     authentication_class   =         []
 
 # class SLAListAPIView(generics.ListAPIView):
 
-#     queryset               =         SLA.objects.all()
+#     queryset               =         ServiceLevelAgreement.objects.all()
 #     serializers_class      =         SLASerializer
 #     permission_classes     =         []
 #     authentication_class   =         []
 
 # class SLAUpdateAPIView(generics.UpdateAPIView):
-#     queryset               =         SLA.objects.all()
+#     queryset               =         ServiceLevelAgreement.objects.all()
 #     serializers_class      =         SLASerializer
 #     permission_classes     =         []
 #     authentication_class   =         []

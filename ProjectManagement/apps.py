@@ -2,4 +2,5 @@ from django.apps import AppConfig
 
 
 class ProjectmanagementConfig(AppConfig):
-    name = 'ProjectManagement'
+    name = 'Project Management'
+    #verbose_name='Project Management'

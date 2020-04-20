@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     'ProjectManagement',
     'finance',
     'payroll',
-    'SLA',
+    'ServiceLevelAgreement',
     'services',
 
     # 'multiselectfield',
