@@ -1,35 +1,37 @@
 from django.shortcuts import render,redirect
-from .models import Invoice,PurchaseOrder
+from .models import *
 from .serializer import InvoiceSerializer,PurchaseOrderSerializer
 from rest_framework.authentication import SessionAuthentication
 from rest_framework import generics,mixins
 from services.models import *
 from .forms import *
-
+from .filters import *
+from django.db.models.signals import pre_save,post_save
 
 
 def finance(request):
     return render(request,'finance/dashboard.html')
 
+
 def invoice(request):
     invoices = Invoice.objects.all()
-    context = {'invoices':invoices}
+    invfilter = InvoiceFilter(request.GET,queryset=invoices)
+    invoices = invfilter.qs
+
+    context = {'invoices':invoices,'invfilter':invfilter}
     return render(request,'finance/invoice.html',context)
 
 
 def invinfo(request,pk):
     invoice = Invoice.objects.get(id=pk)
     entries = invoice.serviceentry_set.all()
-    s = 0
-    for q in entries.iterator():
-        s += (q.rate * q.Qty) - (((q.Discount)/100) * (q.Qty * q.rate)) + q.Tax
+    # s = 0
+    # for q in entries.iterator():         ############## need to modify , its wrong here
+    #     s += (q.rate * q.Qty) - (((q.Discount)/100) * (q.Qty * q.rate)) + q.Tax
     
     
-    context = {'invoice':invoice,'entries':entries,'sum': s}
+    context = {'invoice':invoice,'entries':entries} #,'sum': s
     return render(request,'finance/invinfo.html',context)
-
-
-
 
 def createinvoice(request):
     inv_form = InvoiceForm()
@@ -39,10 +41,12 @@ def createinvoice(request):
         ent_form = SEntryForm(request.POST)
         if inv_form.is_valid() and ent_form.is_valid():
             inv = inv_form.save()
+            # inv.pre_save.connect(pre_save_Stotal, sender=Invoice)
             ent = ent_form.save(False)
 
             ent.invoice = inv
             ent.save()
+            # pre_save.send(sender=Invoice)
             return redirect('invoice')
 
     context = {'inv_form':inv_form,'ent_form':ent_form}

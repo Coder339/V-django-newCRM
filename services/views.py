@@ -3,11 +3,6 @@ from .models import *
 from .forms import *
 
 
-
-
-
-
-
 def service(request):
     return render(request,'service/dashboard.html')
 
@@ -107,6 +102,7 @@ def deleteService(request,pk):
     return render(request,'service/deleteservice.html',context)
 
 ########################################################
+
 def product(request):
     products = Product.objects.all()
     context = {'products':products}
@@ -151,3 +147,6 @@ def deleteProduct(request,pk):
 
     context = {'item':item}
     return render(request,'service/deleteproduct.html',context)
+
+
+    

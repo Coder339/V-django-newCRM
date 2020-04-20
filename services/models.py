@@ -3,14 +3,7 @@ from finance.models import *
 
 class Service(models.Model) :
     
-#     services = (
-#     ('INTERNET','Netwrok Service'),
-#     ('TV', 'Tv Premium'),
-#     ('CALL', 'Call Service'),
-#     ('MEDIA', 'Digital Media'),
-#     ('CLOUD','Cloud Service')
-#     # ('UNKNOWN','Unknown')
-# )   
+ 
     
     
     # invoice       = models.ForeignKey(Invoice,on_delete=models.CASCADE,null=True)
@@ -35,16 +28,12 @@ class Service(models.Model) :
     
 
 class Plan(models.Model):
-#     plans = (
-#     ('MONTHLY','Monthly'),
-#     ('YEARLY', 'Yearly'),
-#     # ('UNKNOWN','Unknown')
-# )
+
     types = (
     ('PREPAID','Prepaid'),
     ('POSTPAID', 'Postpaid'),
     # ('UNKNOWN','Unknown')
-)
+    )
     
     planId         = models.CharField(max_length=30,null=True,blank=False)   
     Type           = models.CharField(max_length=20,choices=types,null=True)
@@ -81,34 +70,6 @@ class Product(models.Model):
 ##################################################################################################
 
                                                             #--------------------FOR SERVICE INLINE
-class ServiceEntry(models.Model):
-    invoice                = models.ForeignKey(Invoice,on_delete=models.CASCADE,null=True)
-    service                = models.ForeignKey(Service,on_delete=models.CASCADE,null=True)
-    description            = models.TextField(max_length=250, blank=False, null=True)    
-    # price                  = models.DecimalField(max_digits=20, decimal_places=2, blank=True, null=True)
-    rate                   = models.FloatField()
-    Qty                    = models.FloatField()
-    Discount               = models.FloatField()
-    Tax                    = models.FloatField()
-    # SubTotal               = models.IntegerField()
 
-    def __str__(self):
-        return str(self.service)
-
-                                                            #--------------------FOR PRODUCT INLINE
-class ProductEntry(models.Model):
-    PO                     = models.ForeignKey(PurchaseOrder,on_delete=models.CASCADE,null=True)
-    Product                = models.ForeignKey(Product,on_delete=models.CASCADE,null=True)
-    description            = models.TextField(max_length=250, blank=False, null=True)
-    # price                  = models.DecimalField(max_digits=20,decimal_places=2, blank=True, null=True)
-    rate                   = models.FloatField()    
-    Qty                    = models.FloatField()
-    Discount               = models.FloatField()
-    Tax                    = models.FloatField()
-    # SubTotal               = models.IntFloatFieldegerField()
-    # payment_terms          = models.TextField(max_length=250, blank=False, null=True)
-
-    def __str__(self):
-        return str(self.Product)
 
 

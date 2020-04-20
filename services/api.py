@@ -24,3 +24,5 @@ from .forms import *
 #     permission_classes     =         []
 #     authentication_class   =         []
 #     lookup_field           =         'pk'
+
+

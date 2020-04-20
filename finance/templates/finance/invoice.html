@@ -1,6 +1,6 @@
 
- {% extends 'finance/main.html' %}
-
+{% extends 'finance/main.html' %}
+{% load bootstrap %}
 {% block content %}
 
  <br>
@@ -35,9 +35,14 @@
             <hr>
             <div class="card card-body">
                 <form method="get">
-
+                  {{invfilter.form|bootstrap_horizontal}}
                 <button class="btn btn-primary" type="submit">Search</button>
                 </form>
+                <ul>
+                {% for inv in invfilter.qs %}
+                    <li>{{ inv.Invoice_number }} - {{ inv.customer_name }} - {{inv.Invoice_date}}</li>
+                {% endfor %}
+                </ul>
             </div>
 	    </div>
 

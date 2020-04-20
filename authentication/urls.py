@@ -36,7 +36,9 @@ urlpatterns = [
     # path('delete/<int:pk>', views.userdelete.as_view(), name='user-delete'),
 
 
-    path('accounts/',LoginAPIView.as_view())
+    path('accounts/',LoginAPIView.as_view()),
+    path('register/', views.register, name='sign-up'),
+    path('login/', views.login, name='sign-in'),
 
 
 ]

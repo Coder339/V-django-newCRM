@@ -44,10 +44,11 @@ class CustomerAdmin(admin.ModelAdmin):
     class Meta:
         model = Customer
         
-    readonly_fields = ['customer_ID']
+    # readonly_fields = ['customer_ID']
     
-    def customer_ID(self,obj):
-        return  str(obj.first_name) + str(obj.id)
+    # def customer_ID(self,obj):
+    #     return  str(obj.first_name) + str(obj.id)
+
 
 
 class VendorAdmin(admin.ModelAdmin):

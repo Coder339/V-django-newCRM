@@ -2,12 +2,17 @@
 
 Welcome to the Customer Relational Management! This project is about improving business relationship with potential customers. CRM is developed on django framework.
 
-### This project contains the following modules.
-- Accounts
+[click here for detailed documentations](https://github.com/Coder339/V-django-newCRM/wiki)
+
+
+### This project contains the following _modules_.
+_Modules are nothing but different App Names in which each has a different purpose._
+- Authentications
 - Finance
-- Business Development
+- Project Management
 - HR
 - Payroll
+- Service
 - SLA
 
  Accounts.

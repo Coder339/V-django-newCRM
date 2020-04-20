@@ -6,9 +6,6 @@ from . import views
 from .views import home
 
 
-
-
-
 urlpatterns = [
     # path('', views.HomePageView.as_view(), name='home'),
     # path('', views.ListUsers.as_view(), name='users-view'),
@@ -30,6 +27,6 @@ urlpatterns = [
     path('service/',include('services.urls')),
     # path('users/', include('django.contrib.auth.urls')), # new
     path('admin/', admin.site.urls),
-    # path('register/', Register.as_view(), name='signup'),
-    # path('auth/',include('rest_framework.urls'))
+    
 ]
+
