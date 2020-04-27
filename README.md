@@ -22,6 +22,8 @@ _Modules are nothing but different App Names in which each has a different purpo
  - #### Username: `admin`
  - #### Password: `admin123`
  
+ ![admin-login](http://i.xp.io/2gfnACwZ.png)
+ 
  ## Installation
  - #### For window users
  
