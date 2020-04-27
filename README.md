@@ -2,6 +2,8 @@
 
 Welcome to the Customer Relational Management! This project is about improving business relationship with potential customers. CRM is developed on django framework.
 
+   ![crm](http://i.xp.io/2gfFBkum.jpg)
+   
 [click here for detailed documentations](https://github.com/Coder339/V-django-newCRM/wiki)
 
 
