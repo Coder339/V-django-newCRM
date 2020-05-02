@@ -3,10 +3,10 @@ from django.db import models
 # from services.models import Service
 # from multiselectfield import MultiSelectField
 from django.db.models.signals import pre_save
-from django.contrib.auth.models import (
-    AbstractUser,
+from django.contrib.auth.models import (AbstractUser)
+#from ServiceLevelAgreement.models import SLA
 
-)
+
 
 govId_choices = (
     ('driving license', 'DRIVING LICENSE'),
@@ -154,6 +154,8 @@ class Customer(models.Model):
     createdBy         = models.ForeignKey(EmployeeProfile, on_delete=models.CASCADE, default='',editable=False,null=True)
     company_code      = models.CharField(max_length=150, blank=False, null=True)
     customer_id       = models.CharField(max_length=150, blank=True, null=True)
+    # ticket_no         = models.IntegerField(blank=True,null=True)
+    # issue             = models.CharField(max_length=150,blank=True,null=True)
     # services          = MultiSelectField(choices=MY_CHOICES,null=True)
     # serviceTAG        = models.ManyToManyField(Service)
 
@@ -171,6 +173,7 @@ class Customer(models.Model):
 
     def __str__(self):
         return (self.first_name)
+
 
     class Meta:
         verbose_name_plural = 'Customer'

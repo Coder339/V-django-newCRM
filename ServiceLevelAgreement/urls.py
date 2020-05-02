@@ -8,6 +8,6 @@ urlpatterns = [
         # path('Escalation', views.EscalationListAPIView.as_view(), name='details'),
         # path('Escalation', views.EscalationCreateAPIView.as_view(), name='add'),
         # path('Escalation/<ticket_no>/edit/', views.EscalationUpdateAPIView.as_view(), name='put'),
-
-        path('',views.sla,name='sla')
+        #
+        # path('',views.sla,name='sla')
 ]

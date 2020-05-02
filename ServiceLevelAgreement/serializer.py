@@ -6,7 +6,8 @@ class SLASerializer(serializers.ModelSerializer):
           model        =           SLA
           fields       =           '__all__'
 
-# class EscalationSerializer(serializers.ModelSerializer):
-#     class Meta:
-#           model         =           Escalation
-#           fields        =           '__all__'
+class HistorySerializer(serializers.ModelSerializer):
+    class Meta:
+          model         =           History
+          fields        =           '__all__'
+
