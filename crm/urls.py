@@ -1,17 +1,16 @@
 
 from django.contrib import admin
-from django.urls import path,include
+from django.urls import include,path
 # from authentication.views import Register
-from . import views
-from .views import home
+#from ProjectManagement import views
+#from .views import home
 
 
 urlpatterns = [
     # path('', views.HomePageView.as_view(), name='home'),
     # path('', views.ListUsers.as_view(), name='users-view'),
-    
-    path('',views.home,name='home'),
-    path('profile/', include('authentication.urls')),
+    #path('',views.home,name='home'),
+    #path('profile/', include('authentication.urls')),
     # path('fin/', views.finance, name = 'finance'),
     # path('hrs/', views.hr, name = 'hr'),
     # path('pay/', views.payroll, name = 'payroll'),
@@ -27,6 +26,12 @@ urlpatterns = [
     path('service/',include('services.urls')),
     # path('users/', include('django.contrib.auth.urls')), # new
     path('admin/', admin.site.urls),
+
+    ###API's
+    path('pmAPI/',include('ProjectManagement.urls')),
+    path('slaAPI/',include('ServiceLevelAgreement.urls')),
+
+
     
 ]
 

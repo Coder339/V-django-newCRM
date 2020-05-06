@@ -11,6 +11,9 @@ stage=(('INITIATED','Initiated'),('IN PROGRESS','In Progress'),
        ('RESOLVED','Resolved'))
 
 class SLA(models.Model):
+
+    #owner                   =               models.ForeignKey()
+
     customer_name           =               models.ManyToManyField(Customer)
     issue                   =               models.CharField(max_length=100,blank='False', null='False')
     priority                =               models.CharField(choices=priority,max_length=200,default='')
@@ -27,28 +30,12 @@ class SLA(models.Model):
      #   return ('{}, Ticket no:{}'.format(','.join (self.customer_name.all().values_list('first_name',flat=True)),self.id))
     def __str__(self):
         return ('Ticket no:{},Issue:{}'.format  (self.id,self.issue))
-#
-# def post_save_history_create_receiver(instance,sender,*args, **kwargs):
-#     a=instance.customer_name_id
-#     print(a)
-#     s=SLA.objects.all()
-#     box=s.filter(customer_name=a)
-#     print(box)
-#     #c=box.count()
-#     # for i in box:
-#     #     print(i)
-#     #
-#     if not instance.issue1:
-#                 instance.issue1=box
-
-#
-# pre_save.connect(post_save_history_create_receiver, sender=History)
 
 
 class History(models.Model):
 
-    customer_name                        =               models.ForeignKey(Customer,on_delete=models.CASCADE)
-    issue                               =               models.CharField(max_length=300,blank=True)
+    customer_name                       =               models.ForeignKey(Customer,on_delete=models.CASCADE)
+    issue                               =               models.TextField(max_length=300,blank=True)
     ticket_no                           =               models.CharField(max_length=300,blank=True)
 
 

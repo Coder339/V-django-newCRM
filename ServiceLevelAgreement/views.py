@@ -1,80 +1,71 @@
-
 from django.shortcuts import render
-from rest_framework import generics
+
+from django.http import Http404
+
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+
 from .models import *
 from .serializer import *
 
-#ServiceLevelAgreement
-class SLACreateAPIView(generics.CreateAPIView):
-    queryset               =         SLA.objects.all()
-    serializers_class      =         SLASerializer
-    permission_classes     =         []
-    authentication_class   =         []
+#######################SLA#########################
 
-class SLAListAPIView(generics.ListAPIView):
+class SLAList(APIView):
+    def get(self,request):
+         queryset               =         SLA.objects.all()
+         serializer             =         SLASerializer(queryset,many=True)
+         permission_classes     =         []
+         authentication_class   =         []
+         return Response (serializer.data)
 
-    queryset               =         SLA.objects.all()
-    serializers_class      =         SLASerializer
-    permission_classes     =         []
-    authentication_class   =         []
+    def post(self,request):
+            serializer           =         SLASerializer(data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data,status=status.HTTP_201_CREATED)
+            else:
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-class SLAUpdateAPIView(generics.UpdateAPIView):
-    queryset               =        SLA.objects.all()
-    serializers_class      =         SLASerializer
-    permission_classes     =         []
-    authentication_class   =         []
-    lookup_field           =         'pk'
+# class SLAdetail(APIView):
 
 
-# #Record
-
-class HistoryCreateAPIView(generics.CreateAPIView):
-    queryset               =        History.objects.all()
-    serializers_class      =        HistorySerializer
-    permission_classes     =         []
-    authentication_class   =         []
-
-class HistoryListAPIView(generics.ListAPIView):
-
-    queryset               =        History.objects.all()
-    serializers_class      =        HistorySerializer
-    permission_classes     =         []
-    authentication_class   =         []
-
-class HistoryUpdateAPIView(generics.UpdateAPIView):
-    queryset               =       History.objects.all()
-    serializers_class      =       HistorySerializer
-    permission_classes     =         []
-    authentication_class   =         []
-    lookup_field           =         'pk'
 
 #
-# class RecordCreateAPIView(generics.CreateAPIView):
-#     queryset               =        Record.objects.all()
-#     serializers_class      =        RecordSerializer
-#     permission_classes     =         []
-#     authentication_class   =         []
-#
-# class RecordListAPIView(generics.ListAPIView):
-#
-#     queryset               =        Record.objects.all()
-#     serializers_class      =        RecordSerializer
-#     permission_classes     =         []
-#     authentication_class   =         []
-#
-# class RecordUpdateAPIView(generics.UpdateAPIView):
-#     queryset               =       Record.objects.all()
-#     serializers_class      =       RecordSerializer
+# class SLAUpdateAPIView(generics.UpdateAPIView):
+#     queryset               =        SLA.objects.all()
+#     serializers_class      =         SLASerializer
 #     permission_classes     =         []
 #     authentication_class   =         []
 #     lookup_field           =         'pk'
-# #
-# #
 
 
+###########################History##############################
+
+class HistoryList(APIView):
+    def get(self,request):
+        History_queryset       =        History.objects.all()
+        serializers_class      =        HistorySerializer(History_queryset,many=True)
+        permission_classes     =         []
+        authentication_class   =         []
+        return Response(serializers_class.data)
+
+    def post(self,request):
+            serializer           =         HistorySerializer(data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data,status=status.HTTP_201_CREATED)
+            else:
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-
+#
+# class HistoryUpdateAPIView(generics.UpdateAPIView):
+#     queryset               =       History.objects.all()
+#     serializers_class      =       HistorySerializer
+#     permission_classes     =         []
+#     authentication_class   =         []
+#     lookup_field           =         'pk'
 
 #
 # def sla(request):
