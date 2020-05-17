@@ -14,7 +14,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin
 # from django.contrib.admin import AdminSite
 
-from .forms import CustomUserCreationForm, CustomUserChangeForm
+# from .forms import CustomUserChangeForm #CustomUserCreationForm,
 from .models import User
 
 
@@ -23,12 +23,12 @@ admin.site.register(EmployeeProfile)
 
 admin.site.register(Company)
 
-class CustomUserAdmin(UserAdmin):
-    model = User
-    add_form = CustomUserCreationForm
-    form = CustomUserChangeForm
+# class CustomUserAdmin(UserAdmin):
+#     model = User
+#     add_form = CustomUserCreationForm
+#     form = CustomUserChangeForm
 
-admin.site.register(User, CustomUserAdmin)
+admin.site.register(User) # ,CustomUserAdmin
 
 
 # from django.db import models
@@ -39,15 +39,15 @@ admin.site.register(User, CustomUserAdmin)
 #         models.ManyToManyField: {'widget': CheckboxSelectMultiple},
 #     }
 
-class CustomerAdmin(admin.ModelAdmin):
+# class CustomerAdmin(admin.ModelAdmin):
                 
-    class Meta:
-        model = Customer
+#     class Meta:
+#         model = Customer
         
-    # readonly_fields = ['customer_ID']
+#     # readonly_fields = ['customer_ID']
     
-    # def customer_ID(self,obj):
-    #     return  str(obj.first_name) + str(obj.id)
+#     # def customer_ID(self,obj):
+#     #     return  str(obj.first_name) + str(obj.id)
 
 
 
@@ -63,5 +63,5 @@ class VendorAdmin(admin.ModelAdmin):
 
 
 
-admin.site.register(Customer,CustomerAdmin)
+admin.site.register(Customer)#,CustomerAdmin)
 admin.site.register(Vendor,VendorAdmin)

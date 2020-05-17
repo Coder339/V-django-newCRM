@@ -3,14 +3,15 @@ from django.contrib import admin
 from django.urls import include,path
 # from authentication.views import Register
 #from ProjectManagement import views
-#from .views import home
-
+# from .views import home
+from . import views
 
 urlpatterns = [
     # path('', views.HomePageView.as_view(), name='home'),
     # path('', views.ListUsers.as_view(), name='users-view'),
-    #path('',views.home,name='home'),
-    #path('profile/', include('authentication.urls')),
+
+    path('',views.home,name='home'),
+    path('profile/', include('authentication.urls')),
     # path('fin/', views.finance, name = 'finance'),
     # path('hrs/', views.hr, name = 'hr'),
     # path('pay/', views.payroll, name = 'payroll'),
@@ -26,11 +27,19 @@ urlpatterns = [
     path('service/',include('services.urls')),
     # path('users/', include('django.contrib.auth.urls')), # new
     path('admin/', admin.site.urls),
+    
+    # apis urls 
+    path('api/auth/',include('authentication.api.urls')),
+    path('api/finance/',include('finance.api.urls')),
+    path('api/hr/',include('HR.api.urls')),
+    path('api/payroll/',include('payroll.api.urls')),
+    # path('api/project/',include('ProjectManagement.api.urls')),
+    path('api/services/',include('services.api.urls')),
+    # path('api/sla/',include('SLA.api.urls')),
 
-    ###API's
+    ### Aman's API's
     path('pmAPI/',include('ProjectManagement.urls')),
     path('slaAPI/',include('ServiceLevelAgreement.urls')),
-
 
     
 ]
