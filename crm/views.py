@@ -1,7 +1,8 @@
 from django.shortcuts import render,redirect
+from django.http import HttpResponse
 
 def home(request):
-    return render(request,'crm/dashboard.html')
+    return HttpResponse('your site works now go to /admin')
 
 
 # from django.contrib.auth.decorators import login_required

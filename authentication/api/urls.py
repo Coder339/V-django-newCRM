@@ -4,7 +4,7 @@ from . import views
 
 urlpatterns = [
     #custom auth api
-    path('',views.AuthAPI.as_view()),  
+    # path('',views.AuthAPI.as_view()),  
     # JWT
     path('jwt/',obtain_jwt_token),
     path('jwt/refresh/',refresh_jwt_token),
@@ -24,5 +24,10 @@ urlpatterns = [
 ]
 
 
+# from .views import CustomerViewSet
+# from rest_framework.routers import DefaultRouter
 
+# router = DefaultRouter()
+# router.register(r'', CustomerViewSet, basename='user')
+# urlpatterns = router.urls
 # 88

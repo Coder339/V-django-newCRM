@@ -1,19 +1,9 @@
 import React, { Component } from 'react';
 import Article from '../components/Article';
 import axios from 'axios';
+import CustomForm from '../components/Form';
 
 
-// const listData = [];
-// for (let i = 0; i < 23; i++) {
-//   listData.push({
-//     href: 'http://ant.design',
-//     title: `ant design part ${i}`,
-//     avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-//     description:'',
-//     content:
-//       'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
-//   });
-// }
 
 class ArticleList extends Component {
     state = {
@@ -29,7 +19,16 @@ class ArticleList extends Component {
     }
     render() {
         return (
-            <Article data={this.state.articles}/>
+            <div>
+                <Article data={this.state.articles}/>
+                <br/>
+                <h2>Add An User</h2>
+                <CustomForm 
+                requestType='post'
+                articleID={null}
+                btnTxt='Create'/>
+            </div>
+            
         )
     }
 }

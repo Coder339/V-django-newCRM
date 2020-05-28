@@ -9,76 +9,42 @@ from rest_framework import permissions,authentication
 from rest_framework import generics,mixins
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework import (
+    generics,
+    status,
+)
 from utils.permissions import *
 from .serializer import *
 # from rest_framework.decorators import api_view
 from . import views
 
-                                    
-# class CreateUserView(generics.CreateAPIView):
-#     queryset = User.objects.all()
-#     serializer_class = UserSerializer
-#     permission_classes      =   []
-#     authentication_classes  =   []
-
-# class ListUserView(generics.ListAPIView):
-#     queryset = User.objects.all()
-#     serializer_class = UserSerializer
-#     permission_classes      =   []
-#     authentication_classes  =   []
-
-# class UpdateUserView(generics.UpdateAPIView):
-#     queryset = User.objects.all()
-#     serializer_class = UserSerializer
-#     permission_classes      =   []
-#     authentication_classes  =   []
-#     lookup_field = 'pk'
-
-#                                     # user's profile
-# class CreateProfileView(generics.CreateAPIView):
-#     queryset = EmployeeProfile.objects.all()
-#     serializer_class = EmployeeProfileSerializer
-#     permission_classes      =   []
-#     authentication_classes  =   []
-
-# class ListProfileView(generics.ListAPIView):
-#     queryset = EmployeeProfile.objects.all()
-#     serializer_class = EmployeeProfileSerializer
-#     permission_classes      =   []
-#     authentication_classes  =   []
-
-# class UpdateProfileView(generics.UpdateAPIView):
-#     queryset = EmployeeProfile.objects.all()
-#     serializer_class = EmployeeProfileSerializer
-#     permission_classes      =   []
-#     authentication_classes  =   []
-#     lookup_field = 'pk'
 
 
 
-# User = get_user_model()
+
+User = get_user_model()
 
 class RegistrationView(generics.CreateAPIView):
     authentication_classes      =   []
-    permission_classes          =   [AnonPermission] 
+    permission_classes          =   [] 
     serializer_class            =   RegisterSerializer
     queryset                    =   User.objects.all()
 
     
-    # def post(self,request,*args,**kwargs):
-    #     if request.method == 'POST':
-    #         serializer = RegisterSerializer(data = request.data)
-    #         data = {}
-    #         if serializer.is_valid():
-    #             user = serializer.save()
-    #             data['response'] = RegisterSerializer.get_message(self,obj=user)
-    #             data['email']    = user.email
-    #             data['username'] = user.username
-    #             data['token']    = RegisterSerializer.get_token(self,obj=user)  # token generation view @
-    #         else:
-    #             data = serializer.errors
+    def post(self,request,*args,**kwargs):
+        if request.method == 'POST':
+            serializer = RegisterSerializer(data = request.data)
+            data = {}
+            if serializer.is_valid():
+                user = serializer.save()
+                data['response'] = RegisterSerializer.get_message(self,obj=user)
+                data['email']    = user.email
+                data['username'] = user.username
+                data['token']    = RegisterSerializer.get_token(self,obj=user)  # token generation view @
+            else:
+                data = serializer.errors
             
-    #         return Response(data)
+            return Response(data)
 
 
 
@@ -102,14 +68,67 @@ class LoginAPIView(generics.GenericAPIView):
         username            =   request.data['username']
         password            =   request.data['password']
         user                =   authenticate(request,username=username,password=password)
+        data = {}
         if user is not None:
             login(request,user)
-            response    =   {'messages':'you are logged in ...'}
-            return Response(response)
+            serializer = LoginSerializer(data = request.data)
+            data['response'] = LoginSerializer.get_message(self,obj=user)
+            # response    =   {'messages':'you are logged in ...'}
+            data['token']    = LoginSerializer.get_token(self,obj=user)
+            # return Response(response)
+            return Response(data)
+
         response    =   {'messages':'invalid credentials'}
         return Response(response)
 
 
+# class RegistrationView(generics.GenericAPIView):
+#     """Register new users."""
+#     serializer_class = RegisterSerializer
+#     # renderer_classes = (UserJSONRenderer,)
+
+#     def post(self, request):
+#         serializer = self.serializer_class(data=request.data)
+#         serializer.is_valid(raise_exception=True)
+#         serializer.save()
+#         user_data = serializer.data
+#         message = [
+#             request,
+#             user_data["email"]
+#         ]
+
+#         response = {
+#             "data": {
+#                 "user": dict(user_data),
+#                 "message": "Account created successfully",
+#                 "status": "success"
+#             }
+#         }
+#         return Response(response, status=status.HTTP_201_CREATED)
+
+# class LoginAPIView(generics.GenericAPIView):
+#     """login a user via username"""
+#     authentication_classes      =   []
+#     permission_classes          =   [] 
+#     serializer_class            =   LoginSerializer
+#     # queryset                    =   User.objects.all()
+#     # authentication_classes      =   [authentication.TokenAuthentication]
+#     # permission_classes          =   [permissions.AllowAny] 
+    
+
+#     def post(self, request):
+#         print('now here', request.data)
+#         serializer = self.serializer_class(data=request.data)
+#         serializer.is_valid(raise_exception=True)
+#         user_data = serializer.data
+#         response = {
+#             "data": {
+#                 "user": dict(user_data),
+#                 "message": "You have successfully logged in",
+#                 "status": "success"
+#             }
+#         }
+#         return Response(response, status=status.HTTP_200_OK)
 
 class UserListCreateView(mixins.ListModelMixin,
                         mixins.CreateModelMixin,
@@ -240,7 +259,7 @@ class CustomerListCreateView(mixins.ListModelMixin,
     queryset                = Customer.objects.all()
     serializer_class        = CustomerSerializer
     permission_classes      =   []
-    # authentication_classes  =   [SessionAuthentication]
+    authentication_classes  =   []
 
 
     def get(self,request,*args,**kwargs):
@@ -261,7 +280,7 @@ class CustomerDetailView(mixins.RetrieveModelMixin,
     queryset                = Customer.objects.all()
     serializer_class        = CustomerSerializer
     permission_classes      = []
-    # authentication_classes  = [SessionAuthentication]
+    authentication_classes  = []
     lookup_field            = 'pk'
 
     def get(self, request, *args, **kwargs):
@@ -344,3 +363,12 @@ class AuthAPI(APIView):
         token = jwt_encode_handler(payload) #creating token manually
         jwt_token = jwt_response_payload_handler(token,user=user,request=request)
         return Response(jwt_token)
+
+
+# from rest_framework import viewsets
+# from .serializer import CustomerSerializer
+# from authentication.models import *
+
+# class CustomerViewSet(viewsets.ModelViewSet):
+#     serializer_class = CustomerSerializer
+#     queryset = Customer.objects.all()

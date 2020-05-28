@@ -6,7 +6,7 @@ import CustomLayout from './containers/layout';
 // import Article from './components/Article';
 import { BrowserRouter as Router } from 'react-router-dom';
 import BaseRoute from './routes';
-
+import Nav from './components/Nav'
 class App extends Component {
 
   render() {
@@ -14,8 +14,10 @@ class App extends Component {
       <div>
         <Router>
           <CustomLayout>
-            <BaseRoute />
+             {/* <Nav/> */}
+             <BaseRoute />
           </CustomLayout>
+          
         </Router>
       </div>
     )

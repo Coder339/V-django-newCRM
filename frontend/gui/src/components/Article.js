@@ -7,8 +7,28 @@ class Article extends Component {
   render() {
     return this.props.data.map((todo) => (
       <div>
-         <p>{todo.first_name}</p>
+        <h2>
+        <a href={`/${todo.id}`}>{todo.first_name}</a>
+        <br/>
+        </h2>
+        <li>lastname      : {todo.last_name}</li>
+        <li>email_id      : {todo.email_id}</li>
+        <li>govt_id       : {todo.govt_id}</li>
+        <li>id_no         : {todo.id_no}</li>
+        <li>p_id1         : {todo.p_id1}</li>
+        <li>p_id_link     : {todo.p_id_link}</li>
+        <li>contact       : {todo.contact}</li>
+        <li>address_1     : {todo.address_1}</li>
+        <li>address_2     : {todo.address_2}</li>
+        <li>city          : {todo.city}</li>
+        <li>state         : {todo.state}</li>
+        <li>country       : {todo.country}</li>
+        <li>zip_code      : {todo.zip_code}</li>
+        <li>company_code  : {todo.company_code}</li>
+        <li>customer_id   : {todo.customer_id}</li>
+        <br/>
       </div>
+      
       
     ));
     
@@ -17,43 +37,5 @@ class Article extends Component {
 
 export default Article;
 
-// const Article = (props) => {
-//     return (
-//         <List
-//         itemLayout="vertical"
-//         size="large"
-//         pagination={{
-//           onChange: page => {
-//             console.log(page);
-//           },
-//           pageSize: 3,
-//         }}
-//         dataSource={props.data}
-//         footer={
-//           <div>
-//             <b>Customers</b>
-//           </div>
-//         }
-//         renderItem={item => (
-//           <List.Item
-//             key={item.first_name}
-//           >
-//             <List.Item.Meta
-//               avatar={<Avatar src={item.avatar} />}
-//               title={<a href={item.href}>{item.first_name}</a>}
-//               description={item.email_id}
-          
-//             />
-            
-//             {item.content}
-//           </List.Item>
-//         )}
-//       />
-//     );
-// }
-
-
-
-// export default Article;
 
 

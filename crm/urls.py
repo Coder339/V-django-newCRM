@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.urls import include,path
 # from authentication.views import Register
 #from ProjectManagement import views
-# from .views import home
+from .views import home
 from . import views
 
 urlpatterns = [

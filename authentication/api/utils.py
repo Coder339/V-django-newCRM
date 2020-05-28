@@ -11,7 +11,7 @@ def jwt_response_payload_handler(token, user=None, request=None):
     return {
         'token': token,
         'user': user.username,
-        'expires': timezone.now() + expiration_delta - datetime.timedelta(seconds=180)
+        'expires': timezone.now() + expiration_delta - datetime.timedelta(seconds=3600)
     }
 
 
