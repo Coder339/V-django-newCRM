@@ -13,15 +13,15 @@ class ServiceEntryInline(admin.TabularInline):
     model = ServiceEntry
     extra = 1
 
-    readonly_fields = ['unit_price','amount']              
+    # readonly_fields = ['unit_price','amount']              
     
-    def unit_price(self,obj):
-        return "$" + str((obj.rate))
+    # def unit_price(self,obj):
+    #     return "$" + str((obj.rate))
 
 
-    def amount(self,obj):                                                                       
-        value = (obj.service.cost * obj.Qty) - (((obj.Discount)/100) * (obj.Qty * obj.service.cost))     # important: taking value from Service model
-        return "$" + str(float(value + obj.Tax))                                                          # i.e service.cost
+    # def amount(self,obj):                                                                       
+    #     value = (obj.service.cost * obj.Qty) - (((obj.Discount)/100) * (obj.Qty * obj.service.cost))     # important: taking value from Service model
+    #     return "$" + str(float(value + obj.Tax))                                                          # i.e service.cost
                                                                                                            # till now this is the only solution
                                                                                                             # gives error on obj.rate instead of obj.service.cost
     
@@ -77,14 +77,14 @@ class InvoiceAdmin(admin.ModelAdmin):
 class ProductEntryInline(admin.TabularInline):
     model = ProductEntry
     extra = 1
-    readonly_fields = ['unit_price','amount']
+    # readonly_fields = ['unit_price','amount']
     
-    def unit_price(self, obj):
-        return "$" + str(float(obj.Product.cost))
+    # def unit_price(self, obj):
+    #     return "$" + str(float(obj.Product.cost))
 
-    def amount(self, obj):
-        value = (obj.Product.cost * obj.Qty) - (((obj.Discount)/100) * (obj.Qty * obj.Product.cost))
-        return "$" + str(float(value + obj.Tax))
+    # def amount(self, obj):
+    #     value = (obj.Product.cost * obj.Qty) - (((obj.Discount)/100) * (obj.Qty * obj.Product.cost))
+    #     return "$" + str(float(value + obj.Tax))
 
 
 

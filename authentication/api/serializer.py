@@ -76,7 +76,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 
 
 
-    def save(self):       
+    def create(self,validated_data):       
         user = User(
             email = self.validated_data['email'],
             username = self.validated_data['username'],
@@ -86,7 +86,8 @@ class RegisterSerializer(serializers.ModelSerializer):
         
         if password != password2:
             raise serializers.ValidationError({'password':'password must match'})
-        user.set_password(password)
+        user.set_password(validated_data['password'])
+        user.is_active = True
         user.save()
         return user
 

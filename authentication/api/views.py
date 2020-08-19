@@ -69,7 +69,7 @@ class LoginAPIView(generics.GenericAPIView):
         password            =   request.data['password']
         user                =   authenticate(request,username=username,password=password)
         data = {}
-        if user is not None:
+        if user is not None and user.is_active:
             login(request,user)
             serializer = LoginSerializer(data = request.data)
             data['response'] = LoginSerializer.get_message(self,obj=user)
