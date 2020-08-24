@@ -29,7 +29,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     
     # apis urls 
-    path('api/auth/',include('authentication.api.urls')),
+    path('api/auth/',include('authentication.Newapi.urls')),
     path('api/finance/',include('finance.api.urls')),
     path('api/hr/',include('HR.api.urls')),
     path('api/payroll/',include('payroll.api.urls')),

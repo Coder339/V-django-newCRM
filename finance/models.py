@@ -11,31 +11,18 @@ User = get_user_model()
 
 class Invoice(models.Model):  # for customers
     user                   = models.ForeignKey(User,on_delete=models.CASCADE,null=True,editable=False,blank=True)
-    # user = User.objects.create_user(username="name", email="email@mail.com", password="Pass12345")
     customer               = models.ForeignKey(Customer, on_delete=models.CASCADE,editable=False,null=True)
     from_company           = models.CharField(max_length=20, blank=False, null=True)
     customer_name          = models.CharField(max_length=20, blank=False, null=True)
-    # date_time              = models.DateTimeField(verbose_name = 'date and time of order',auto_now=False, 
-    #                                               auto_now_add=True)
-        
     Invoice_number         = models.CharField(max_length=30)  # keep in the format of fisrt customername then date then any serial_number
                                                                # example ; "customername_date_serialnumber"
                                                                 # you can use first 2 or 3 letters of every word like
                                                                  # customer: CU, january: JAN,
                                                                   # serial number: numerals like 123,
 
-    # cust_sno               = models.CharField(verbose_name ='customerID',max_length=20, blank=True,
-                                            #   null=True)  # format :- first client_name then customer_name
     Invoice_date           = models.DateField()
-    
     payment_terms          = models.TextField(max_length=250, blank=False, null=True)
-    
     Total                  = models.FloatField(blank=True, null=True)
-
-    
-    
-    # def __init__(self,*args, **kwargs):
-    #     super(ServiceEntry,self).__init__(*args, **kwargs)
 
 
     def __str__(self):
